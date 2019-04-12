@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.tom.controller.UserCheckIDController;
+import org.tom.controller.UserDeleteController;
+import org.tom.controller.UserModifyController;
 import org.tom.controller.UserSignInController;
 import org.tom.controller.UserSignUpController;
 import org.tom.forword.Action;
@@ -69,6 +71,15 @@ public class UserFrontController extends HttpServlet {
 			action = new UserCheckIDController();
 			actionForward = action.execute(request, response);
 		}
+		if(command.equals("/Modify.user")) {
+			action = new UserModifyController();
+			actionForward = action.execute(request, response);
+		}
+		if(command.equals("/Delete.user")) {
+			action = new UserDeleteController();
+			actionForward = action.execute(request, response);
+		}
+		
 		
 		
 		if(actionForward!=null) {

@@ -129,7 +129,7 @@ public class UserDAOImpl extends DAO implements UserDAO{
 
 	// 사용자 정보 수정
 	@Override
-	public int userInfoModify(UserVO vo) {
+	public boolean userInfoModify(UserVO vo) {
 		try {
 			pstmt = conn.prepareStatement("UPDATE user SET user_id = ?, user_pw = ?, user_name = ?,user_email = ? , user_phone = ? user_address = ? WHERE user_index = ?");
 			pstmt.setString(1, vo.getUser_id());
@@ -140,17 +140,18 @@ public class UserDAOImpl extends DAO implements UserDAO{
 			pstmt.setString(6, vo.getUser_address());
 			pstmt.setInt(7, vo.getUser_index());
 			
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			
+			return true;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}finally {
 			try {
 				close();
 			} catch (Exception e) {}
 		}
-		
-		return 0;
 	}
 
 	// 유저 목록 
@@ -230,20 +231,20 @@ public class UserDAOImpl extends DAO implements UserDAO{
 
 	// 유저 삭제/회원 탈퇴
 	@Override
-	public int userDelete(UserVO vo) {
+	public boolean userDelete(UserVO vo) {
 		try {
-			pstmt = conn.prepareStatement("DELETE FROM user WHERE user_index = ?");
-			pstmt.setInt(1, vo.getUser_index());
+			pstmt = conn.prepareStatement("DELETE FROM user WHERE user_id = ?");
+			pstmt.setString(1, vo.getUser_id());
 			
-			return pstmt.executeUpdate();
-			
+			pstmt.executeUpdate();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}finally {
 			try {
 				close();
 			} catch (Exception e) {}
 		}
-		return 0;
 	}
 }
