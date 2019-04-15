@@ -17,7 +17,7 @@ public interface UserDAO {
 	public boolean userCheckID(UserVO vo);
 	public boolean userInfoModify(UserVO vo);
 	public ArrayList<UserVO> userInfoList();
-	public UserVO userInfo(UserVO vo);
+	public UserVO userInfo(int user_index);
 	public boolean userDelete(UserVO vo);
 	public int userIndexReturn(UserVO vo);
 }

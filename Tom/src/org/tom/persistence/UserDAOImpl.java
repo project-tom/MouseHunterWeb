@@ -197,11 +197,12 @@ public class UserDAOImpl extends DAO implements UserDAO{
 
 	// 유저 정보
 	@Override
-	public UserVO userInfo(UserVO vo) {
+	public UserVO userInfo(int user_index) {
 		try {
 			pstmt = conn.prepareStatement("SELECT * FROM user WHERE user_index = ?");
-			pstmt.setInt(1, vo.getUser_index());
+			pstmt.setInt(1, user_index);
 			rs = pstmt.executeQuery();
+			UserVO vo = new UserVO();
 			if(rs.next()) {
 			
 				vo = new UserVO();

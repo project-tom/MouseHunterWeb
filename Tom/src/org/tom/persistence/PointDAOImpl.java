@@ -80,6 +80,7 @@ public class PointDAOImpl extends DAO implements PointDAO{
 			pstmt.setDouble(4, vo.getPoint_longitude());
 			pstmt.setString(5, vo.getPoint_address());
 			pstmt.setString(6, vo.getBluetooth_address());
+			pstmt.executeUpdate();
 			return true;
 						
 						
@@ -124,7 +125,7 @@ public class PointDAOImpl extends DAO implements PointDAO{
 		try {
 			pstmt = conn.prepareStatement("DELETE FROM point WHERE point_index = ?");
 			pstmt.setInt(1, vo.getPoint_index());
-			
+			pstmt.executeUpdate();
 			return true;
 			
 			
