@@ -26,11 +26,11 @@ public class DAO {
 			Context init = new InitialContext();
 			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mariadb");
 			conn = ds.getConnection();
-			System.out.print("DB접속 성공");
+			System.out.println("DB Access Succeed");
 		
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.print("DB접속 실패");
+			System.out.println("DB Access Denied");
 		}	
 	}
 	

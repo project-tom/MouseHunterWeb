@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordEncryption {
 	private String pass;
-    private String key;
+    private String key = "";
     
     public PasswordEncryption(String msg) throws IOException{
         try {        	
@@ -17,9 +17,10 @@ public class PasswordEncryption {
             int singleCh = 0;
             while((singleCh = filereader.read()) != -1){
                 key += (char)singleCh;
+                System.out.println(key);
             }
             filereader.close();
-
+            
         	pass = encryption(msg , key);
         	
         } catch (NoSuchAlgorithmException e) {

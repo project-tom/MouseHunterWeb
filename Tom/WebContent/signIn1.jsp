@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
+		String user_index = session.getAttribute("user_index").toString();
+		System.out.print("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+	}
+%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,28 +43,29 @@
 	
 	#reldiv1 {
 		vertical-align: middle;
-	   z-index: 3;
-	   height: 100px;
-	   position: relative;
-	   top: 30px;
-	   border: 1px dashed #669966;
-	   background-color: #ccffcc;
-	   margin: 0px 50px 0px 50px;
-	   text-align: center;
-	   display: inline-block;
+		z-index: 3;
+		position: relative;
+		display: inline-block;
+		width:30rem; 
+		height:30rem; 
+		border-radius:20px; 
+		border: 3px solid black; 
+		margin-left:100px;  
+		padding: 20px; 
+		background-color:white;
 	}
-   #reldiv2 {
+	#reldiv2 {
 		vertical-align: middle;
-	   z-index: 2;
-	   height: 700px;
-	   position: relative;
-	   top: 15px;
-	   left: 20px;
-	   border: 1px dashed #669966;
-	   background-color: #ccffcc;
-	   margin: 0px 50px 0px 50px;
-	   text-align: center;
-	   display: inline-block;
+		z-index: 2;
+		height: 700px;
+		position: relative;
+		top: 15px;
+		left: 20px;
+		border: 1px dashed #669966;
+		background-color: #ccffcc;
+		margin: 0px 50px 0px 50px;
+		text-align: center;
+		display: inline-block;
 	}
 	
 /***************** 이미지 슬라이드 가운데로 위치 시키기***************** */
@@ -107,23 +115,23 @@
 
 <!----------------------------------main안에 로그인---------------------------------->
 		<div id="main">
-			<div class="card align-middle" style="width:30rem; height:30rem; border-radius:20px; 
-						border: 3px solid black; margin-left:100px;  padding: 20px; background-color:white;" id="reldiv1">
+			<div class="card align-middle" style="" id="reldiv1">
 				<div class="card-title">
 					<p style="font-size:24px;" class="card-title text-left" style="color:black;"><strong>쥐를 잡자 쥐를 잡자</strong></p>
-					<p style="font-size:24px;"><strong>쥐쥐쥐~^0^</strong></p><br>
+					<p style="font-size:24px;" class="card-title text-left" style="color:black;"><strong>쥐쥐쥐~^0^</strong></p><br>
 				</div>
 				<div class="card-body">
-			    	<form class="form-signin" method="POST" onSubmit="logincall();return false">
+			    	<form action="SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
 			       		<label for="inputEmail" class="sr-only"></label>
-			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" required autofocus><BR>
+			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" name="user_id" required autofocus><BR>
 			        	<label for="inputPassword" class="sr-only"></label>
-			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" required><br>
+			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required><br>
+			        	<input type="hidden" name="fromWep" value="true">
 			        	<div class="checkbox">
 			          	<label class="pull-left">
 			           		<input type="checkbox" value="remember-me" > 기억하기<br>
-			          	</label><br>
-			          	<button id="btn-Yes" class="btn btn btn pull-right" type="submit" >로그인</button>
+			          	</label>
+			          	<button id="btn-Yes" class="btn pull-right " type="submit" >로그인</button>
 		        		</div>
 		     		</form>
 				</div>
@@ -144,26 +152,14 @@
 			
 			      <div class="item active">
 			        <img src="tom1.jpg" alt="Los Angeles" style="width:700px; height:700px;">
-			        <div class="carousel-caption">
-			          <h3>Los Angeles</h3>
-			          <p>LA is always so much fun!</p>
-			        </div>
 			      </div>
 			
 			      <div class="item">
 			        <img src="tom2.jpg" alt="Chicago" style="width:700px; height:700px;">
-			        <div class="carousel-caption">
-			          <h3>Chicago</h3>
-			          <p>Thank you, Chicago!</p>
-			        </div>
 			      </div>
 			    
 			      <div class="item">
 			        <img src="tom3.jpg" alt="New York" style="width:700px; height:700px;">
-			        <div class="carousel-caption">
-			          <h3>New York</h3>
-			          <p>We love the Big Apple!</p>
-			        </div>
 			      </div>
 			  
 			    </div>

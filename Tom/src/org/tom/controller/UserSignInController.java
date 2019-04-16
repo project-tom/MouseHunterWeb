@@ -34,22 +34,26 @@ public class UserSignInController implements Action {
 		UserVO vo = new UserVO();
 		vo.setUser_id(request.getParameter("user_id"));
 		vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
+		
+		System.out.println(new PasswordEncryption(request.getParameter("user_pw")).getPass());
 		// dao 의 출력 결과를 result에 저장
 		// userSignIn의 반환형은 boolean으로 id와 pw 가 DB의 정보와 일치하면 true, 아니면 false를 반환한다.
 		boolean result= dao.userSignIn(vo);
+		System.out.println(result);
 		if(result) {
 			// 로그인이 성공할시 해당 유저의 사용자 번호도 전달한다.
-			request.setAttribute("user_index", new UserDAOImpl().userIndexReturn(vo));
+			request.setAttribute("user_index_temp", new UserDAOImpl().userIndexReturn(vo));
 		}else {
-			request.setAttribute("user_index", "");
+			request.setAttribute("user_index_temp", "");
 		}
+		
 		
 		
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
 		if(request.getParameter("fromWep").equals("true")) {
-			
+			actionForward.setURI("signInTemp.jsp");
 		}else {
 			actionForward.setURI("SignInResultForApp.jsp");
 		}

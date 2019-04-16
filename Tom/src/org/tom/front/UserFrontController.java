@@ -27,38 +27,25 @@ import org.tom.forword.ActionForward;
 
 
 
-/**
- * Servlet implementation class FrontController
- */
 @WebServlet("*.user")
 public class UserFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public UserFrontController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     
     
     
-    //
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	// URI -> COMMAND 蹂��솚 
     	String requestURI = request.getRequestURI();
 		String ContextPath = request.getContextPath();
 		String command = requestURI.substring(ContextPath.length());
 		
-		// 寃곌낵 �럹�씠吏� �씠�룞 猷⑦떞
 		ActionForward actionForward=null;
 		Action action = null;
 		
-		
-		// COMMAND 蹂� �떎�뻾 猷⑦떞
 		if(command.equals("/SignUp.user")) {
 			action = new UserSignUpController();
 			actionForward = action.execute(request, response);

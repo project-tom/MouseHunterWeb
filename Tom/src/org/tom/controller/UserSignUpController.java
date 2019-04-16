@@ -49,7 +49,7 @@ public class UserSignUpController implements Action{
 		try {
 			// 앱에서 오지 않았을 경우 실행
 			// 앱의 경우 dialog 문제로 생일 지정을 위한 프래그먼트 생성이 너무 오래 걸려서 제거함
-			if(request.getParameter("fromApp").equals("false")){
+			if(request.getParameter("fromWep").equals("true")){
 				String birth =  request.getParameter("year")+"-"+	
 								request.getParameter("month")+"-"+
 								request.getParameter("day");
