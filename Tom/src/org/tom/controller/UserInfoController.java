@@ -12,7 +12,7 @@ import org.tom.forword.ActionForward;
 import org.tom.persistence.UserDAOImpl;
 
 public class UserInfoController implements Action {
-
+	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 

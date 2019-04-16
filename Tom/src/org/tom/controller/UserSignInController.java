@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.com.encryption.PasswordEncryption;
 import org.tom.domain.UserVO;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
@@ -31,9 +32,8 @@ public class UserSignInController implements Action {
 
 		// dao에 값을 전달하기 위한 vo 객체 생성
 		UserVO vo = new UserVO();
-		vo.setUser_id(request.getParameter("id"));
-		vo.setUser_pw(request.getParameter("pw"));
-		
+		vo.setUser_id(request.getParameter("user_id"));
+		vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
 		// dao 의 출력 결과를 result에 저장
 		// userSignIn의 반환형은 boolean으로 id와 pw 가 DB의 정보와 일치하면 true, 아니면 false를 반환한다.
 		boolean result= dao.userSignIn(vo);
@@ -48,7 +48,12 @@ public class UserSignInController implements Action {
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("SignInResultForApp.jsp");
+		if(request.getParameter("fromWep").equals("true")) {
+			
+		}else {
+			actionForward.setURI("SignInResultForApp.jsp");
+		}
+		
 		
 		return actionForward;
 	}
