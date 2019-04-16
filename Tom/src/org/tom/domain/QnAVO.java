@@ -12,6 +12,8 @@ public class QnAVO {
 	private int qna_readcount;
 	private int qna_parentnum;
 	private int qna_answer;
+	
+	
 	public int getQna_index() {
 		return qna_index;
 	}

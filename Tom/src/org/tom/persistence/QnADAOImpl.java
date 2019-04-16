@@ -10,7 +10,57 @@ public class QnADAOImpl extends DAO implements QnADAO {
 	public QnADAOImpl() {
 		super();
 	}
-	
+	public ArrayList<QnAVO> qnaListPage(int page) {
+		try {
+			pstmt = conn.prepareStatement("SELECT * FROM qna ORDER BY qna_parentnum desc,qna_answer asc LIMIT ?,?");
+			pstmt.setInt(1, (page-1)*10);
+			pstmt.setInt(2, 10);
+			
+			rs = pstmt.executeQuery();
+			ArrayList<QnAVO> list = new ArrayList<>();
+			while(rs.next()) {
+				QnAVO vo = new QnAVO();
+				vo.setQna_index(rs.getInt("qna_index"));
+				vo.setQna_title(rs.getString("qna_title"));
+				vo.setQna_content(rs.getString("qna_content"));
+				vo.setQna_author(rs.getString("qna_author"));
+				vo.setQna_date(rs.getDate("qna_date"));
+				vo.setQna_pass(rs.getString("qna_pass"));
+				vo.setQna_parentnum(rs.getInt("qna_parentnum"));
+				vo.setQna_readcount(rs.getInt("qna_readcount"));
+				vo.setQna_answer(rs.getInt("qna_answer"));
+				
+				list.add(vo);
+			}
+			
+			return list;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			try {
+				close();
+			} catch (Exception e) {}
+		}
+	}
+		
+	public int totalQnA() {
+		try {
+			pstmt = conn.prepareStatement("SELECT count(*) AS count FROM qna");
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			return rs.getInt("count");
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			try {
+				close();
+			} catch (Exception e) {}
+		}
+	}
 	@Override
 	public ArrayList<QnAVO> qnaList() {
 		try {

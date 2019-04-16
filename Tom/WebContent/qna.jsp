@@ -1,6 +1,11 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -71,33 +76,35 @@
 		</tr>
 		</thead>
 		<tbody style="background-color: #B1EFFF">
-			<tr>
-			<td>0</td>
-			<td>쥐덫 위치 등록화면 관련해서</td>
-			<td>hwang</td>
-			<td>2019-04-11</td>
-			<td>5</td>
-		</tr>
-		<tr>
-			<th>0</th>
-			<th>쥐덫 위치 등록화면 관련해서</th>
-			<th>hwang</th>
-			<th>2019-04-11</th>
-			<th>5</th>
-		</tr>
+			<c:forEach var="vo" items="${qnaList}" varStatus="status">
+				<tr>
+					<td>${qnaList.get(status.index).getQna_index() }</td>
+					<td>${qnaList.get(status.index).getQna_title() }</td>
+					<td>${qnaList.get(status.index).getQna_author() }</td>
+					<td>${qnaList.get(status.index).getQna_date() }</td>
+					<td>${qnaList.get(status.index).getQna_readcount() }</td>
+				</tr>
+			</c:forEach>
+			
 		</tbody>
 	</table>	
 	<hr/>
 	<a class="btn btn-default pull-right">글쓰기</a>
 	<div class="text-center">
 		<ul class="pagination">
-			<li><a href="#">&lt;</a>
-			<li><a href="#">1</a>
-			<li><a href="#">2</a>
-			<li><a href="#">3</a>
-			<li><a href="#">4</a>
-			<li><a href="#">5</a>
-			<li><a href="#">&gt;</a>
+			<c:set var="currentPage" value="${page}"></c:set>
+			<c:set var="totalQnA" value="&{totalQnA}"></c:set>
+			<c:if test="totalQnA%10 == 0"></c:if>
+			<c:set var="maxPage" value=""></c:set>
+			
+			<c:if test="${page } > 1"><li><a href="#">&lt;</a></c:if>
+			<c:if test="${page-2 } > 0"><li><a href="#">${page-2 }</a></c:if>
+			<c:if test="${page-1 } > 0"><li><a href="#">${page-1 }</a></c:if>
+										<li><a href="#">${page }</a>
+			<c:if test="${page+1 } > 0"><li><a href="#">${page+1 }</a></c:if>
+			<c:if test="${page+2 } > 0"><li><a href="#">${page+2 }</a></c:if>
+			<c:if test="${page } < maxPage"><li><a href="#">&gt;</a></c:if>
+			
 		</ul>	
 	</div>	
 	</div>

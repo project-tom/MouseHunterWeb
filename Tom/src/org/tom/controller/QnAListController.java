@@ -18,14 +18,17 @@ public class QnAListController implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		QnADAOImpl dao = new QnADAOImpl();
+		int page = Integer.parseInt(request.getParameter("page"));
 		
-		ArrayList<QnAVO> qnaList =  dao.qnaList();
+		int total = dao.totalQnA();
+		ArrayList<QnAVO> qnaList =  dao.qnaListPage(page);
 		
+		request.setAttribute("totalQnA", total);
 		request.setAttribute("qnaList", qnaList);
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("qna.jsp?page="+page);
 		return actionForward;
 	}
 
