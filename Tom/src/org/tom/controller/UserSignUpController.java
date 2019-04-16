@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.com.encryption.PasswordEncryption;
 import org.tom.domain.UserVO;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
@@ -55,14 +56,14 @@ public class UserSignUpController implements Action{
 				
 				date= format.parse(birth);
 			}
-			vo.setUser_id(request.getParameter("id"));
-			vo.setUser_pw(request.getParameter("pw"));
-			vo.setUser_name(request.getParameter("name"));
-			vo.setUser_email(request.getParameter("email"));
+			vo.setUser_id(request.getParameter("user_id"));
+			vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
+			vo.setUser_name(request.getParameter("user_name"));
+			vo.setUser_email(request.getParameter("user_email"));
 			vo.setUser_birth(date);
-			vo.setUser_gender(request.getParameter("gender"));
+			vo.setUser_gender(request.getParameter("user_gender"));
 			vo.setUser_phone(phone);
-			vo.setUser_address(request.getParameter("address"));
+			vo.setUser_address(request.getParameter("user_address"));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +74,13 @@ public class UserSignUpController implements Action{
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("SignUpResultForApp.jsp");
+		
+		if(request.getParameter("fromWep").equals("true")) {
+			
+		}else {
+			actionForward.setURI("SignUpResultForApp.jsp");
+		}
+		
 		
 		return actionForward;
 	}
