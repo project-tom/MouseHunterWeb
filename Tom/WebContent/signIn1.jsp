@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>sign-In</title>
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
@@ -38,7 +38,7 @@
 	
 	#header{background-color: white;}	
 	#sidebar1{background-color: green;}	#sidebar2{background-color: green;}	
-	#main{background-color: skyblue;}	
+	#main{background-color: #B1EFFF;}	
 	#footer{background-color: blue;}	
 	
 	#reldiv1 {

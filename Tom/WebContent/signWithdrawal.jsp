@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>signUp</title>
+<title>signWithdrawal</title>
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
-	#main{ padding-bottom: 200px; width: 100%; height: auto; float: left; margin-top: 30px; }
+	#main{ padding-bottom: 530px; width: 100%; height: auto; float: left; margin-top: 30px; }
 	#footer{ padding: 0px; clear: both; margin: 0px;}			
 	
 	@media screen and(max-width: 980px){
@@ -29,7 +29,7 @@
 	
 	#header{background-color: white;}	
 	#sidebar1{background-color: green;}	#sidebar2{background-color: green;}	
-	#main{background-color:  #B1EFFF;}	
+	#main{background-color: #B1EFFF;}	
 	#footer{background-color: yellow;}	
 
 </style>
@@ -71,48 +71,28 @@
 			</nav>
 		</div>
 
-<!----------------------------------회원가입 테이블---------------------------------->
-
+<!----------------------------------회원탈퇴 테이블---------------------------------->
 		<div id="main">
-			<div class="container" style="padding-top: 100px;">
-				<table class="table" >
-					<caption align="left"><strong>회원가입</strong></caption>
-					<tbody >
-					<tr>
-						<th align="center" style="background-color:#D9D8D8" >아이디</th>
-						<td><input type="text" name="id" /> <input type="button" name="singin" value="중복검사"> 아이디는 영어와 숫자만 가능 </td>
-					</tr>	
-					<tr>
-						<th align="center" style="background-color: #D9D8D8">비밀번호</th>
-						<td><input type="text" name="content" style="width:300px;"></td>
-					</tr>
-					<tr>
-						<th style="background-color: #D9D8D8">성별</th>
-						<td><input type="radio" name="user_gender" value="man">남자
-						 	<input type="radio" name="user_gender" value="woman">여자</td>
-					</tr>
-					<tr>
-			            <th style="background-color: #D9D8D8">생년월일</th>
-			            <td><input type="text" name="user_birth1"> 년 <input type="text" name="user_birth2"> 월 <input type="text" name="user_birth3"> 일</td>
-			        </tr>
-			        <tr>
-			            <th style="background-color: #D9D8D8">이메일</th>
-			            <td><input type="text" name="user_email" /></td>
-			        </tr>
-			        <tr>
-			            <th style="background-color: #D9D8D8">전화번호</th>
-			            <td><input type="text" name="user-phone1"> - <input type="text" name="user-phone2"> - <input type="text" name="user-phone3"></td>
-			        </tr>
-			        <tr>
-			            <th style="background-color: #D9D8D8">주소</th>
-			            <td><input type="text" name="user_address"></td>
-			        </tr>
-					</tbody>
-				</table>	
-				<hr/>
-				<a class="btn btn-default pull-right">가입</a>
-			</div>
+		<p align="center" style="font-size:30pt; padding-top: 100px" > 그 동안 MouseHunter를 이용해 주셔서 감사합니다.<p>
+		<div class="container">
+			<table class="table" >
+				<caption align="left"><strong>회원탈퇴</strong></caption>
+				<tbody style="background-color: #E4DBD9">
+				<tr>
+					<th align="center">아이디</th>
+					<td><input type="text" name="title" style="width:300px;"/></td>
+				</tr>	
+				<tr>
+					<th align="center">비밀번호</th>
+					<td><input type="text" name="content" style="width:300px;"></td>
+				</tr>
+				</tbody>
+			</table>	
+			<hr/>
+			<a class="btn btn-default pull-right">탈퇴</a>
+			<a class="btn btn-default pull-right">취소</a>
 		</div>
+	</div>
 <!----------------------------------풋터---------------------------------->
 		
 		<div id="footer">
