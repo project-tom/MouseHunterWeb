@@ -51,7 +51,7 @@ public class PointAddController implements Action {
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("pointAddResultForApp.jsp");
+		actionForward.setURI("forApps/pointAddResultForApp.jsp");
 		return actionForward;
 	}
 

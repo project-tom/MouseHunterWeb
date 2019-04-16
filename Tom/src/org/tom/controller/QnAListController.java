@@ -21,6 +21,7 @@ public class QnAListController implements Action {
 		int page = Integer.parseInt(request.getParameter("page"));
 		
 		int total = dao.totalQnA();
+		dao = new QnADAOImpl();
 		ArrayList<QnAVO> qnaList =  dao.qnaListPage(page);
 		
 		request.setAttribute("totalQnA", total);
@@ -28,7 +29,7 @@ public class QnAListController implements Action {
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("qna.jsp?page="+page);
+		actionForward.setURI("qna/qna.jsp?page="+page);
 		return actionForward;
 	}
 

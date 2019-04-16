@@ -17,7 +17,6 @@ public class PasswordEncryption {
             int singleCh = 0;
             while((singleCh = filereader.read()) != -1){
                 key += (char)singleCh;
-                System.out.println(key);
             }
             filereader.close();
             

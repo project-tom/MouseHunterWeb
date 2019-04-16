@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
+	String user_index = session.getAttribute("user_index").toString();
+	session.setAttribute("logined","true");
+	session.setAttribute("user_index", user_index);
+	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+}
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,7 +42,7 @@
 	
 	
 </style>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
 <div id="page">
@@ -49,13 +57,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="main.jsp">MouseHunter</a>
+					<a class="navbar-brand" href="signIn.jsp">MouseHunter</a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
 					<ul class="nav navbar-nav">
-						<li><a href="main.jsp">QnA</a></li>
-						<li><a href="bbs.jsp">Map</a></li>
-						<li><a href="bbs.jsp">MyPage</a></li>
+						<li><a href="../QnAList.qna?page=1">QnA</a></li>
+						<li><a href="map.jsp">Map</a></li>
+						<li><a href="myPage.jsp">MyPage</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -63,8 +71,8 @@
 								data-toggle="dropdown" role="button" aria-haspopup="true"
 								aria-expanded="false">접속하기<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li class="active"><a href="login.jsp">로그인</a></li>
-								<li><a href="join.jsp">회원가입</a></li>
+								<li class="active"><a href="signIn.jsp">로그인</a></li>
+								<li><a href="signUp.jsp">회원가입</a></li>
 							</ul>	
 						</li>
 					</ul>
@@ -122,6 +130,6 @@
 		
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type = "text/javascript" src="js/bootstrap.js"></script>
+<script type = "text/javascript" src="/js/bootstrap.js"></script>
 </body>
 </html>

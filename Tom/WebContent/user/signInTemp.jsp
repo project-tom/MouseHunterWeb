@@ -8,5 +8,5 @@ String user_index = request.getAttribute("user_index_temp").toString();
 session.setAttribute("user_index", user_index);
 %>
 <script>
-	location='signIn1.jsp'
+	location='user/signIn.jsp'
 </script>

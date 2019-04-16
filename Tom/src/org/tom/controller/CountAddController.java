@@ -39,7 +39,7 @@ public class CountAddController implements Action {
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("addCountForApp.jsp");
+		actionForward.setURI("forApps/addCountForApp.jsp");
 		return actionForward;
 	}
 

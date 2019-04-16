@@ -39,7 +39,7 @@ public class UserCheckIDController implements Action {
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("IDCheckResultForApp.jsp");
+		actionForward.setURI("forApps/IDCheckResultForApp.jsp");
 		
 		return actionForward;
 	}
