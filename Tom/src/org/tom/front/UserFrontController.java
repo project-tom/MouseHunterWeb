@@ -48,17 +48,17 @@ public class UserFrontController extends HttpServlet {
     //
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	// URI -> COMMAND 변환 
+    	// URI -> COMMAND 蹂��솚 
     	String requestURI = request.getRequestURI();
 		String ContextPath = request.getContextPath();
 		String command = requestURI.substring(ContextPath.length());
 		
-		// 결과 페이지 이동 루틴
+		// 寃곌낵 �럹�씠吏� �씠�룞 猷⑦떞
 		ActionForward actionForward=null;
 		Action action = null;
 		
 		
-		// COMMAND 별 실행 루틴
+		// COMMAND 蹂� �떎�뻾 猷⑦떞
 		if(command.equals("/SignUp.user")) {
 			action = new UserSignUpController();
 			actionForward = action.execute(request, response);
