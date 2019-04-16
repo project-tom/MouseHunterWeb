@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>signUp</title>
+<title>signUpdate</title>
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
-	#main{ padding-bottom: 200px; width: 100%; height: auto; float: left; margin-top: 30px; }
+	#main{ padding-bottom: 525px; width: 100%; height: auto; float: left; margin-top: 30px; }
 	#footer{ padding: 0px; clear: both; margin: 0px;}			
 	
 	@media screen and(max-width: 980px){
@@ -29,9 +29,10 @@
 	
 	#header{background-color: white;}	
 	#sidebar1{background-color: green;}	#sidebar2{background-color: green;}	
-	#main{background-color:  #B1EFFF;}	
+	#main{background-color: #B1EFFF;}	
 	#footer{background-color: yellow;}	
-
+	
+	
 </style>
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
@@ -71,16 +72,15 @@
 			</nav>
 		</div>
 
-<!----------------------------------회원가입 테이블---------------------------------->
-
+<!----------------------------------회원정보 수정 테이블---------------------------------->	
 		<div id="main">
 			<div class="container" style="padding-top: 100px;">
 				<table class="table" >
-					<caption align="left"><strong>회원가입</strong></caption>
+					<caption align="left"><strong>회원정보 수정</strong></caption>
 					<tbody >
 					<tr>
 						<th align="center" style="background-color:#D9D8D8" >아이디</th>
-						<td><input type="text" name="id" /> <input type="button" name="singin" value="중복검사"> 아이디는 영어와 숫자만 가능 </td>
+						<td>hwang</td>
 					</tr>	
 					<tr>
 						<th align="center" style="background-color: #D9D8D8">비밀번호</th>
@@ -110,7 +110,7 @@
 					</tbody>
 				</table>	
 				<hr/>
-				<a class="btn btn-default pull-right">가입</a>
+				<a class="btn btn-default pull-right">수정</a>
 			</div>
 		</div>
 <!----------------------------------풋터---------------------------------->

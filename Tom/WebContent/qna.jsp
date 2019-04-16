@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MouseHunter QnA</title>
+<title>QnA</title>
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
@@ -41,9 +41,9 @@
 		</div>
 	</nav>
 	
-	<!--------------------------------게시판-------------------------------------->
-	<div class="container">
-		<table class="table table-hover">
+	<!--------------------------------게시판 테이블-------------------------------------->
+	<div class="container" style="padding-top: 100px;">
+		<table class="table table-hover" >
 		<thead>
 		<tr>
 			<td>
@@ -79,11 +79,11 @@
 			<td>5</td>
 		</tr>
 		<tr>
-			<th>0</th>
-			<th>쥐덫 위치 등록화면 관련해서</th>
-			<th>hwang</th>
-			<th>2019-04-11</th>
-			<th>5</th>
+			<td>0</td>
+			<td>쥐덫 위치 등록화면 관련해서</td>
+			<td>hwang</td>
+			<td>2019-04-11</td>
+			<td>5</td>
 		</tr>
 		</tbody>
 	</table>	
@@ -101,10 +101,6 @@
 		</ul>	
 	</div>	
 	</div>
-	
-
-
-	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type = "text/javascript" src="js/bootstrap.js"></script>
 </body>
