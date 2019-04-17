@@ -6,6 +6,7 @@
 static Logger logger = Logger.getLogger("signIn.jsp");
 %>
 <%
+	logger.debug("[Page Load...] : signIn.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
 		session.setAttribute("logined","true");

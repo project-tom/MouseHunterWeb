@@ -113,7 +113,7 @@ boolean isAdmin = false;
 				<tr>
 					<th align="center">작성자</th>
 					<td><%=vo.getUser_name() %>
-						<input type="hidden" name="qna_author" value="<%=vo.getUser_name() %>"></td>
+						<input type="hidden" name="qna_author" value="${vo.getUser_name()}"></td>
 				</tr>
 				<tr>
 					<th align="center">내용</th>

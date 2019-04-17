@@ -16,7 +16,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 public class DAO {
+	static Logger logger = Logger.getLogger(DAO.class);
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
@@ -26,11 +29,10 @@ public class DAO {
 			Context init = new InitialContext();
 			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mariadb");
 			conn = ds.getConnection();
-			System.out.println("DB Access Succeed");
-		
+			logger.debug("DB Access Succeed");		
 		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("DB Access Denied");
+			logger.warn("DB Access Denied");
 		}	
 	}
 	
@@ -39,7 +41,7 @@ public class DAO {
 			if(rs!=null) {rs.close();}
 			if(pstmt!=null) {pstmt.close();}
 			if(conn!=null) {conn.close();}
-			System.out.println("DB Closed");
+			logger.debug("DB Closed");
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

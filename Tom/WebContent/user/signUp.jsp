@@ -1,13 +1,18 @@
+<%@page import="org.apache.log4j.Logger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%!
+static Logger logger = Logger.getLogger("signUp.jsp");
+%>
 <%
+	logger.debug("[Page Load...] : signUp.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-	String user_index = session.getAttribute("user_index").toString();
-	session.setAttribute("logined","true");
-	session.setAttribute("user_index", user_index);
-	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
-}
+		String user_index = session.getAttribute("user_index").toString();
+		session.setAttribute("logined","true");
+		session.setAttribute("user_index", user_index);
+		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+	}
 %>
 <html>
 <head>
