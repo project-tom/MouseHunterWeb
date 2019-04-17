@@ -1,4 +1,3 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,36 +12,59 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>QnA</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<title>MemberSearch</title>
+<style>
+	#page{ padding: 5px; width: auto; margin: 20px auto;}
+	#header{ height: 50px; margin: 0px;}
+	#main{ padding-bottom: 20px; width: 100%; height: auto; float: left; margin-top: 30px; }
+	#footer{ padding: 0px; clear: both; margin: 0px;}			
+	
+	@media screen and(max-width: 980px){
+		#page { width: 94%;} 
+		#main { width: 65%;}
+		#sidebar1 { width: 30%;}} #sidebar2 { width: 30%;}}
+		
+	@media screen and(max-width: 700px){
+		#main { width: auto; float: none;}
+		#sidebar1 { width: auto; float: none;}}	 #sidebar2 { width: auto; float: none;}}	
+		
+	@media screen and(max-width: 480px){
+		#header{ height: auto;} 
+		h2 { font-size: 24px;}
+		#sidebar1 { display: none;}} #sidebar2 { display: none;}}
+	
+	#header, #main, #footer{ border: solid 2px gray;}
+	
+	#header{background-color: white;}	
+	#main{background-color: #B1EFFF;}	
+	#footer{background-color: #24BDFF;}	
+</style>
+<link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-<c:set var="search_" value="${param.search}"></c:set>
-<c:set var="uri" value="QnASearch.qna?search_criteria=${param.search_criteria}&search=${search_}&page="></c:set>
-	<!---------------------------------- 상단바---------------------------------->
-		<%@ include file="/bar/memberHeader.jsp"%>
-	
-	<!--------------------------------게시판 테이블-------------------------------------->
+<div id="page">
+<!---------------------------------- 상단바---------------------------------->
+	<%@ include file="/bar/adminHeader.jsp"%>
+
+<!--------------------------------회원검색 테이블-------------------------------------->
 	<div class="container" style="padding-top: 100px;">
 		<table class="table table-hover" >
 		<thead>
 		<tr>
 			<td>
-				QnA
+				회원검색
 			</td>
-			<td colspan="4" align="right">
-				<form action="QnASearch.qna" method="get">	
+			<td colspan="7" align="right">
+				<form action="QnASearch.qna" method="get">	<!-- 여기 수정해야함 -->
 					<select name="search_criteria">
-						<option value="qna_title" selected="selected">제목</option>
-						<option value="qna_author">작성자</option>
+						<option value="qna_title" selected="selected">이름</option>
+						<option value="qna_author">아이디</option>
 					</select>
 					
-					<input type="text" name="search"  value="${search_}">
+					<input type="text" name="search" value="${param.search}" >
 					<input type="hidden" name="page" value="1">
 				 <input type="submit" value="검색" class="btn btn-xs">
 				</form>
@@ -51,11 +73,14 @@
 		</thead>
 		<thead>
 		<tr>
-			<th align="center">No</th>
-			<th align="center">제목</th>
-			<th align="center">작성자</th>
-			<th align="center">날짜</th>
-			<th align="center">조회수</th>
+			<th align="center">아이디</th>
+			<th align="center">이름</th>
+			<th align="center">성별</th>
+			<th align="center">이메일</th>
+			<th align="center">전화번호</th>
+			<th align="center">휴대폰</th>
+			<th align="center">주소</th>
+			<th align="center">회원삭제</th>
 		</tr>
 		</thead>
 		<tbody style="background-color: #B1EFFF">
@@ -71,7 +96,7 @@
 		</tbody>
 	</table>	
 	<hr/>
-	<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }">글쓰기</a>
+	
 	<div class="text-center">
 		<ul class="pagination">
 		
@@ -86,8 +111,9 @@
 				</c:otherwise>
 			</c:choose>
 			
-			
-			
+		
+			<c:set var="uri" value="QnAList.qna?page="></c:set>
+		
 			<c:if test="${currentPage > 1}"><li><a href="${uri}${currentPage-1 }">&lt;</a></c:if>
 			<c:if test="${currentPage-2 > 0}"><li><a href="${uri}${currentPage-2 }">${currentPage-2 }</a></c:if>
 			<c:if test="${currentPage-1 > 0}"><li><a href="${uri}${currentPage-1 }">${currentPage-1 }</a></c:if>
@@ -99,7 +125,11 @@
 		</ul>	
 	</div>	
 	</div>
+<!----------------------------------풋터---------------------------------->
+	<%@ include file="/bar/footer.jsp"%>
+		
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type = "text/javascript" src="/js/bootstrap.js"></script>
+</div>	
 </body>
 </html>

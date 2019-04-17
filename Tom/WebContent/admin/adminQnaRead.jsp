@@ -1,44 +1,25 @@
-<%@page import="org.tom.persistence.UserDAOImpl"%>
-<%@page import="org.tom.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%!
-String user_index;
-boolean isAdmin = false;
-%>
 <%
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-	user_index = session.getAttribute("user_index").toString();
+	String user_index = session.getAttribute("user_index").toString();
 	session.setAttribute("logined","true");
 	session.setAttribute("user_index", user_index);
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 }
 %>
-<%
-	UserVO vo = new UserVO();
-	UserDAOImpl dao = new UserDAOImpl();
-	if(user_index != null){
-		vo = dao.userInfo(Integer.parseInt(user_index));
-	}
-%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-<c:if test="${empty user_index }">
-	<c:redirect url="../QnAList.qna?page=1"></c:redirect>
-</c:if>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>QnA Write</title>
+<title>adminQnaRead</title>
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
-	/* #sidebar1{ padding: 0px; width: 10%; height: auto; float: left; margin: 0px;} */
-	#main{ padding-bottom: 200px; width: 100%; height: auto; float: left; margin-top: 30px; }
-	/* #sidebar2{ padding: 0px; width: 10%; height: auto; float: right; margin: 0px;} */
+	#main{ padding-bottom: 600px; width: 100%; height: auto; float: left; margin-top: 30px; }
 	#footer{ padding: 0px; clear: both; margin: 0px;}			
 	
 	@media screen and(max-width: 980px){
@@ -55,10 +36,9 @@ boolean isAdmin = false;
 		h2 { font-size: 24px;}
 		#sidebar1 { display: none;}} #sidebar2 { display: none;}}
 	
-	#header, #main, #sidebar1, #footer{ border: solid 2px gray;}
+	#header, #main, #footer{ border: solid 2px gray;}
 	
 	#header{background-color: white;}	
-	#sidebar1{background-color: green;}	#sidebar2{background-color: green;}	
 	#main{background-color: #B1EFFF;}	
 	#footer{background-color: #24BDFF;}	
 </style>
@@ -67,45 +47,50 @@ boolean isAdmin = false;
 <body>
 <div id="page">
 <!---------------------------------- 상단바---------------------------------->
-		<%@ include file="/bar/memberHeader.jsp"%>
-		
-	<!--------------------------------게시판 쓰기 테이블-------------------------------------->
+	<%@ include file="/bar/adminHeader.jsp"%>
+
+<!--------------------------------회원검색 테이블-------------------------------------->
 	<div id="main">
 		<div class="container" style="padding-top: 100px;">
-			<form action="../QnAAdd.qna?page=${param.page }" method="post">
-			<table class="table" >
-				<caption align="left"><strong>QnA</strong></caption>
+			<table class="table">
 				<tbody style="background-color: #E4DBD9">
+				<tr style="background-color: #B1EFFF;">
+					<td>
+						<strong>QnA</strong>
+					</td>
+					<td colspan="4" align="right">
+						<form action="??" method="get">	
+							<select>
+								<option value="title" selected="selected">제목</option>
+								<option value="author">작성자</option>
+							</select>
+							<input type="text" name="search" >
+						 <input type="submit" value="검색" class="btn btn-xs">	
+						</form>
+					</td>
+				</tr>
 				<tr>
 					<th align="center">제목</th>
-					<td><input type="text" name="qna_title" style="width:1000px;"/></td>
-				</tr>
-				<tr>
+					<td style="width: 600px;">title</td>
 					<th align="center">작성자</th>
-					<td><%=vo.getUser_name() %>
-						<input type="hidden" name="qna_author" value="${vo.getUser_name()}"></td>
-				</tr>
+					<td>hwang</td>
+				</tr>	
 				<tr>
 					<th align="center">내용</th>
-					<td><input type="text" name="qna_content" style="width:1000px; height:500px;"></td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="qna_pass" />
-						<input type="hidden" name="isAdmin" value="<%=isAdmin%>"></td>
+					<td colspan="3">content</td>
 				</tr>
 				</tbody>
-			</table>
+			</table>	
 			<hr/>
-			<button class="btn btn-default pull-right " type="submit" >등록</button>
-			</form>
-			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
+			<a class="btn btn-default pull-right">답글</a>
+			<a class="btn btn-default pull-right">수정</a>
+			<a class="btn btn-default pull-right">삭제</a>
+			<a class="btn btn-default pull-right">목록</a>
 		</div>
 	</div>
-	<!----------------------------------풋터---------------------------------->
-	<div id="footer">
-		<h2>Thank you for visiting</h2>
-	</div>
+	
+<!----------------------------------풋터---------------------------------->
+	<%@ include file="/bar/footer.jsp"%>
 		
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type = "text/javascript" src="/js/bootstrap.js"></script>
