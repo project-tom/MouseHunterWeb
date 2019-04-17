@@ -95,7 +95,7 @@
 <!----------------------------------회원정보 수정 테이블---------------------------------->	
 		<div id="main">
 			<div class="container" style="padding-top: 100px;">
-				<form action="../Modify.user">
+				<form action="../Modify.user" method="post">
 				<table class="table" >
 					<caption align="left"><strong>회원정보 수정</strong></caption>
 					<tbody >

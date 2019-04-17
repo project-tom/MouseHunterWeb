@@ -1,17 +1,34 @@
+<%@page import="org.tom.persistence.UserDAOImpl"%>
+<%@page import="org.tom.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%!
+String user_index;
+boolean isAdmin = false;
+%>
 <%
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-	String user_index = session.getAttribute("user_index").toString();
+	user_index = session.getAttribute("user_index").toString();
 	session.setAttribute("logined","true");
 	session.setAttribute("user_index", user_index);
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 }
 %>
+<%
+	UserVO vo = new UserVO();
+	UserDAOImpl dao = new UserDAOImpl();
+	if(user_index != null){
+		vo = dao.userInfo(Integer.parseInt(user_index));
+	}
+%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+<c:if test="${empty user_index }">
+	<c:redirect url="../QnAList.qna?page=1"></c:redirect>
+</c:if>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -85,6 +102,7 @@
 	<!--------------------------------게시판 쓰기 테이블-------------------------------------->
 	<div id="main">
 		<div class="container" style="padding-top: 100px;">
+			<form action="../QnAAdd.qna?page=${param.page }" method="post">
 			<table class="table" >
 				<caption align="left"><strong>QnA</strong></caption>
 				<tbody style="background-color: #E4DBD9">
@@ -94,7 +112,8 @@
 				</tr>
 				<tr>
 					<th align="center">작성자</th>
-					<td><input type="text" name="qna_author" style="width:100px;"/></td>
+					<td><%=vo.getUser_name() %>
+						<input type="hidden" name="qna_author" value="<%=vo.getUser_name() %>"></td>
 				</tr>
 				<tr>
 					<th align="center">내용</th>
@@ -103,12 +122,13 @@
 				<tr>
 					<th>비밀번호</th>
 					<td><input type="password" name="qna_pass" />
-						<input type="hidden" name="isQuestion" value="true"></td>
+						<input type="hidden" name="isAdmin" value="<%=isAdmin%>"></td>
 				</tr>
 				</tbody>
 			</table>
 			<hr/>
-			<button id="btn-Yes" class="btn btn-default pull-right " type="submit" >등록</button>
+			<button class="btn btn-default pull-right " type="submit" >등록</button>
+			</form>
 			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
 		</div>
 	</div>

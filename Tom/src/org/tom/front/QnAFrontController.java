@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tom.controller.QnAAddController;
 import org.tom.controller.QnAListController;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
@@ -50,6 +51,12 @@ public class QnAFrontController extends HttpServlet {
 			action = new QnAListController();
 			actionForward = action.execute(request, response);
 		}
+		if(command.equals("/QnAAdd.qna")) {
+			action = new QnAAddController();
+			actionForward = action.execute(request, response);
+		}
+		
+		
 		if(actionForward!=null) {
 			if(actionForward.isRedirect()) {
 				response.sendRedirect(actionForward.getURI());

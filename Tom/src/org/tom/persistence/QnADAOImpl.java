@@ -227,11 +227,11 @@ public class QnADAOImpl extends DAO implements QnADAO {
 	
 	public int getLastIndex() {
 		try {
-			pstmt = conn.prepareStatement("SELECT max(*) as index FROM qna");
+			pstmt = conn.prepareStatement("SELECT max(qna_index) as i FROM qna");
 			rs = pstmt.executeQuery();
 			rs.next();
 			
-			return rs.getInt("index");
+			return rs.getInt("i");
 		}catch (SQLException e) {
 			e.printStackTrace();
 			return 0;
