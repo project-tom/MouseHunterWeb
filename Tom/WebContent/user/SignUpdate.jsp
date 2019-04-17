@@ -1,13 +1,25 @@
+<%@page import="org.tom.persistence.UserDAOImpl"%>
+<%@page import="org.tom.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%!
+	String user_index;
+%>
 <%
+	
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-	String user_index = session.getAttribute("user_index").toString();
+	user_index = session.getAttribute("user_index").toString();
 	session.setAttribute("logined","true");
 	session.setAttribute("user_index", user_index);
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
-}
+	}
+%>
+
+<%
+	UserVO vo = new UserVO();
+	UserDAOImpl dao = new UserDAOImpl();
+	vo = dao.userInfo(Integer.parseInt(user_index));
 %>
 <html>
 <head>
@@ -83,42 +95,44 @@
 <!----------------------------------회원정보 수정 테이블---------------------------------->	
 		<div id="main">
 			<div class="container" style="padding-top: 100px;">
+				<form action="../Modify.user">
 				<table class="table" >
 					<caption align="left"><strong>회원정보 수정</strong></caption>
 					<tbody >
 					<tr>
 						<th align="center" style="background-color:#D9D8D8" >아이디</th>
-						<td>hwang</td>
+						<td><input type="text" name="user_id" style="width:300px;" value="<%=vo.getUser_id()%>"></td>
 					</tr>	
 					<tr>
 						<th align="center" style="background-color: #D9D8D8">비밀번호</th>
-						<td><input type="text" name="content" style="width:300px;"></td>
+						<td><input type="password" name="user_pw" style="width:300px;"></td>
 					</tr>
 					<tr>
-						<th style="background-color: #D9D8D8">성별</th>
-						<td><input type="radio" name="user_gender" value="man">남자
-						 	<input type="radio" name="user_gender" value="woman">여자</td>
+						<th align="center" style="background-color:#D9D8D8" >이름</th>
+						<td><input type="text" name="user_name" style="width:300px;" value="<%=vo.getUser_name()%>"></td>
 					</tr>
 					<tr>
 			            <th style="background-color: #D9D8D8">생년월일</th>
-			            <td><input type="text" name="user_birth1"> 년 <input type="text" name="user_birth2"> 월 <input type="text" name="user_birth3"> 일</td>
+			            <td><input type="text" name="year"> 년 <input type="text" name="month"> 월 <input type="text" name="day"> 일</td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">이메일</th>
-			            <td><input type="text" name="user_email" /></td>
+			            <td><input type="text" name="user_email" value="<%=vo.getUser_email()%>"></td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">전화번호</th>
-			            <td><input type="text" name="user-phone1"> - <input type="text" name="user-phone2"> - <input type="text" name="user-phone3"></td>
+			            <td><input type="text" name="phone1"> - <input type="text" name="phone2"> - <input type="text" name="phone3"></td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">주소</th>
-			            <td><input type="text" name="user_address"></td>
+			            <td><input type="text" name="user_address" value="<%=vo.getUser_address()%>">
+			            	<input type="hidden" name="user_index" value="${user_index }"></td>
 			        </tr>
 					</tbody>
 				</table>	
 				<hr/>
-				<a class="btn btn-default pull-right">수정</a>
+				<button class="btn btn-default pull-right" type="submit" >수정</button>
+				</form>
 			</div>
 		</div>
 <!----------------------------------풋터---------------------------------->

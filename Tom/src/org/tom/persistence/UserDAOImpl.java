@@ -131,14 +131,15 @@ public class UserDAOImpl extends DAO implements UserDAO{
 	@Override
 	public boolean userInfoModify(UserVO vo) {
 		try {
-			pstmt = conn.prepareStatement("UPDATE user SET user_id = ?, user_pw = ?, user_name = ?,user_email = ? , user_phone = ? user_address = ? WHERE user_index = ?");
+			pstmt = conn.prepareStatement("UPDATE user SET user_id = ?, user_pw = ?, user_name = ?,user_birth=?, user_email = ? , user_phone = ?, user_address = ? WHERE user_index = ?");
 			pstmt.setString(1, vo.getUser_id());
 			pstmt.setString(2, vo.getUser_pw());
 			pstmt.setString(3, vo.getUser_name());
-			pstmt.setString(4, vo.getUser_email());
-			pstmt.setString(5, vo.getUser_phone());
-			pstmt.setString(6, vo.getUser_address());
-			pstmt.setInt(7, vo.getUser_index());
+			pstmt.setDate(4, vo.getUser_birth());
+			pstmt.setString(5, vo.getUser_email());
+			pstmt.setString(6, vo.getUser_phone());
+			pstmt.setString(7, vo.getUser_address());
+			pstmt.setInt(8, vo.getUser_index());
 			
 			pstmt.executeUpdate();
 			
@@ -215,7 +216,7 @@ public class UserDAOImpl extends DAO implements UserDAO{
 				vo.setUser_address(rs.getString("user_address"));
 				vo.setUser_birth(rs.getDate("user_birth"));
 				vo.setUser_gender(rs.getString("user_gender"));
-				vo.setUser_reg(rs.getDate("user_gender"));
+				vo.setUser_reg(rs.getDate("user_reg"));
 			}
 			return vo;
 		} catch (SQLException e) {
