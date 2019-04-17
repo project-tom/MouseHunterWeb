@@ -14,6 +14,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -21,7 +22,8 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-
+<c:set var="search_" value="${param.search}"></c:set>
+<c:set var="uri" value="QnASearch.qna?search_criteria=${param.search_criteria}&search=${search_}&page="></c:set>
 	<!---------------------------------- 상단바---------------------------------->
 		<div id="header">
 			<nav class="navbar navbar-default">
@@ -71,7 +73,7 @@
 						<option value="qna_author">작성자</option>
 					</select>
 					
-					<input type="text" name="search" value="${param.search}" >
+					<input type="text" name="search"  value="${search_}">
 					<input type="hidden" name="page" value="1">
 				 <input type="submit" value="검색" class="btn btn-xs">
 				</form>
@@ -115,9 +117,8 @@
 				</c:otherwise>
 			</c:choose>
 			
-		
-			<c:set var="uri" value="QnAList.qna?page="></c:set>
-		
+			
+			
 			<c:if test="${currentPage > 1}"><li><a href="${uri}${currentPage-1 }">&lt;</a></c:if>
 			<c:if test="${currentPage-2 > 0}"><li><a href="${uri}${currentPage-2 }">${currentPage-2 }</a></c:if>
 			<c:if test="${currentPage-1 > 0}"><li><a href="${uri}${currentPage-1 }">${currentPage-1 }</a></c:if>

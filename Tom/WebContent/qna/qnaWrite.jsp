@@ -9,6 +9,9 @@
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 }
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -84,28 +87,28 @@
 		<div class="container" style="padding-top: 100px;">
 			<table class="table" >
 				<caption align="left"><strong>QnA</strong></caption>
-				<!-- <tr>
-					<th align="center">
-						QnA
-					</th>
-					<td colspan="4"> -->
 				<tbody style="background-color: #E4DBD9">
 				<tr>
 					<th align="center">제목</th>
 					<td><input type="text" name="qna_title" style="width:1000px;"/></td>
-				</tr>	
+				</tr>
+				<tr>
+					<th align="center">작성자</th>
+					<td><input type="text" name="qna_author" style="width:100px;"/></td>
+				</tr>
 				<tr>
 					<th align="center">내용</th>
 					<td><input type="text" name="qna_content" style="width:1000px; height:500px;"></td>
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="password" name="qna_pass" /></td>
+					<td><input type="password" name="qna_pass" />
+						<input type="hidden" name="isQuestion" value="true"></td>
 				</tr>
 				</tbody>
 			</table>	
 			<hr/>
-			<a class="btn btn-default pull-right" >등록</a>
+			<button id="btn-Yes" class="btn btn-default pull-right " type="submit" >등록</button>
 			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
 		</div>
 	</div>

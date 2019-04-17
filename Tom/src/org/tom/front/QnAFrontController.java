@@ -46,8 +46,10 @@ public class QnAFrontController extends HttpServlet {
 			action = new QnAListController();
 			actionForward = action.execute(request, response);
 		}
-		
-		
+		if(command.equals("/QnASearch.qna")) {
+			action = new QnAListController();
+			actionForward = action.execute(request, response);
+		}
 		if(actionForward!=null) {
 			if(actionForward.isRedirect()) {
 				response.sendRedirect(actionForward.getURI());

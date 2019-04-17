@@ -39,6 +39,7 @@ public class DAO {
 			if(rs!=null) {rs.close();}
 			if(pstmt!=null) {pstmt.close();}
 			if(conn!=null) {conn.close();}
+			System.out.println("DB Closed");
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
