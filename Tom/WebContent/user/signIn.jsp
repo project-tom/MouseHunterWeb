@@ -100,8 +100,8 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
 					<ul class="nav navbar-nav">
 						<li><a href="../QnAList.qna?page=1">QnA</a></li>
-						<li><a href="map.jsp">Map</a></li>
-						<li><a href="myPage.jsp">MyPage</a></li>
+						<li><a href="">Map</a></li>
+						<li><a href="SignUpdate.jsp">MyPage</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -127,16 +127,18 @@
 				</div>
 				<div class="card-body">
 			    	<form action="../SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
-			       		<label for="inputEmail" class="sr-only"></label>
-			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" name="user_id" required autofocus><BR>
-			        	<label for="inputPassword" class="sr-only"></label>
-			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required><br>
+			    	
+			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" name="user_id" required autofocus>
+			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required>
+			        	
 			        	<input type="hidden" name="fromWeb" value="true">
+			        	
 			        	<div class="checkbox">
 			          	<label class="pull-left">
-			           		<input type="checkbox" value="remember-me" > 기억하기<br>
+			           		<input type="checkbox" value="remember-me" > 기억하기
 			          	</label>
-			          	<button id="btn-Yes" class="btn pull-right " type="submit" >로그인</button>
+			          	
+			          	<button class="btn pull-right " type="submit" >로그인</button>
 		        		</div>
 		     		</form>
 				</div>
@@ -156,15 +158,15 @@
 			    <div class="carousel-inner">
 			
 			      <div class="item active">
-			        <img src="/resource/tom1.jpg" alt="Los Angeles" style="width:700px; height:700px;">
+			        <img src="/resource/tom1.jpg" style="width:700px; height:700px;">
 			      </div>
 			
 			      <div class="item">
-			        <img src="/resource/tom2.jpg" alt="Chicago" style="width:700px; height:700px;">
+			        <img src="/resource/tom2.jpg" style="width:700px; height:700px;">
 			      </div>
 			    
 			      <div class="item">
-			        <img src="/resource/tom3.jpg" alt="New York" style="width:700px; height:700px;">
+			        <img src="/resource/tom3.jpg" style="width:700px; height:700px;">
 			      </div>
 			  
 			    </div>

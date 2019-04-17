@@ -106,7 +106,7 @@
 						<input type="hidden" name="isQuestion" value="true"></td>
 				</tr>
 				</tbody>
-			</table>	
+			</table>
 			<hr/>
 			<button id="btn-Yes" class="btn btn-default pull-right " type="submit" >등록</button>
 			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
