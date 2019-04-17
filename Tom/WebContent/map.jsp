@@ -9,14 +9,18 @@
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 }
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>signWithdrawal</title>
+<title>Map</title>
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
-	#main{ padding-bottom: 530px; width: 100%; height: auto; float: left; margin-top: 30px; }
+	#main{ padding-bottom: 50px; padding-top: 100px; width: 100%; height: auto; float: left; margin-top: 30px; }
 	#footer{ padding: 0px; clear: both; margin: 0px;}			
 	
 	@media screen and(max-width: 980px){
@@ -38,47 +42,66 @@
 	#header{background-color: white;}	
 	#sidebar1{background-color: green;}	#sidebar2{background-color: green;}	
 	#main{background-color: #B1EFFF;}	
-	#footer{background-color: yellow;}	
-
+	#footer{background-color: #24BDFF;}	
+	
+	#reldiv {
+		vertical-align: middle;
+		position: relative;
+		display: inline-block;
+		border-radius:20px; 
+		border: 3px solid black; 
+		padding-top: 100px; 
+		margin-left: 100px;
+	}
+	
 </style>
 <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
 <div id="page">
-<!----------------------------------상단바(nav)---------------------------------->		
-		<%@ include file="/bar/memberHeader.jsp"%>
+<!---------------------------------- 상단바---------------------------------->
+	<%@ include file="/bar/memberHeader.jsp"%>
 
-<!----------------------------------회원탈퇴 테이블---------------------------------->
-		<div id="main">
-		<p align="center" style="font-size:30pt; padding-top: 100px" > 그 동안 MouseHunter를 이용해 주셔서 감사합니다.<p>
-		<div class="container">
-			<table class="table" >
-				<caption align="left"><strong>회원탈퇴</strong></caption>
-				<tbody style="background-color: #E4DBD9">
+<!--------------------------------관리자 답글 테이블-------------------------------------->
+	<div id="main">
+		<div id="reldiv" style="width: 100rem; height: 70rem">
+			지도그림 들어갑니다.
+		</div>
+		<div id="reldiv" style="width: 50rem; height: 50rem">	
+			<table class="table">
 				<tr>
-					<th align="center">아이디</th>
-					<td><input type="text" name="title" style="width:300px;"/></td>
-				</tr>	
-				<tr>
-					<th align="center">비밀번호</th>
-					<td><input type="text" name="content" style="width:300px;"></td>
+					<th>No</th>
+					<td> 1 </td>
 				</tr>
-				</tbody>
-			</table>	
-			<hr/>
-			<a class="btn btn-default pull-right">탈퇴</a>
-			<a class="btn btn-default pull-right">취소</a>
+				<tr>
+					<th>이름</th>
+					<td> 설치된 건물 이름 </td>
+				</tr>
+				<tr>
+					<th>주소</th>
+					<td> 건물 주소 </td>
+				</tr>
+				<tr>
+					<th>리셋날짜</th>
+					<td> 20190409 </td>
+				</tr>
+				<tr>
+					<th>위도</th>
+					<td> 216511 </td>
+				</tr>
+				<tr>
+					<th>경도</th>
+					<td> 165165 </td>
+				</tr>
+			</table>
 		</div>
 	</div>
+	
 <!----------------------------------풋터---------------------------------->
+	<%@ include file="/bar/footer.jsp"%>
 		
-		<div id="footer">
-				<h2>Thank you for visiting</h2>
-		</div>
-		
-		
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type = "text/javascript" src="/js/bootstrap.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type = "text/javascript" src="/js/bootstrap.js"></script>
+</div>	
 </body>
 </html>
