@@ -45,7 +45,7 @@ public class PointModifyController implements Action {
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("pointUpdateResultForApp.jsp");
+		actionForward.setURI("forApps/pointUpdateResultForApp.jsp");
 		return actionForward;
 	}
 

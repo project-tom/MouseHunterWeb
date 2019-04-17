@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
+	String user_index = session.getAttribute("user_index").toString();
+	session.setAttribute("logined","true");
+	session.setAttribute("user_index", user_index);
+	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+}
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,7 +41,7 @@
 	#footer{background-color: yellow;}	
 
 </style>
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
 <div id="page">
@@ -48,13 +56,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="main.jsp">MouseHunter</a>
+					<a class="navbar-brand" href="signIn.jsp">MouseHunter</a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
 					<ul class="nav navbar-nav">
-						<li><a href="main.jsp">QnA</a></li>
-						<li><a href="bbs.jsp">Map</a></li>
-						<li><a href="bbs.jsp">MyPage</a></li>
+						<li><a href="../QnAList.qna?page=1">QnA</a></li>
+						<li><a href="map.jsp">Map</a></li>
+						<li><a href="myPage.jsp">MyPage</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -62,8 +70,8 @@
 								data-toggle="dropdown" role="button" aria-haspopup="true"
 								aria-expanded="false">접속하기<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li class="active"><a href="login.jsp">로그인</a></li>
-								<li><a href="join.jsp">회원가입</a></li>
+								<li class="active"><a href="signIn.jsp">로그인</a></li>
+								<li><a href="signUp.jsp">회원가입</a></li>
 							</ul>	
 						</li>
 					</ul>
@@ -75,16 +83,23 @@
 
 		<div id="main">
 			<div class="container" style="padding-top: 100px;">
+				<form action="../SignUp.user" method="POST" >
 				<table class="table" >
 					<caption align="left"><strong>회원가입</strong></caption>
 					<tbody >
+					
 					<tr>
 						<th align="center" style="background-color:#D9D8D8" >아이디</th>
-						<td><input type="text" name="id" /> <input type="button" name="singin" value="중복검사"> 아이디는 영어와 숫자만 가능 </td>
+						<td><input type="text" name="user_id" /> <input type="button" name="singin" value="중복검사"> 아이디는 영어와 숫자만 가능 
+							<input type="hidden" name="isDuplication" value="unChecked"></td>
 					</tr>	
 					<tr>
 						<th align="center" style="background-color: #D9D8D8">비밀번호</th>
-						<td><input type="text" name="content" style="width:300px;"></td>
+						<td><input type="password" name="user_pw" style="width:300px;"></td>
+					</tr>
+					<tr>
+						<th align="center" style="background-color: #D9D8D8">이름</th>
+						<td><input type="text" name="user_name" style="width:300px;"></td>
 					</tr>
 					<tr>
 						<th style="background-color: #D9D8D8">성별</th>
@@ -93,7 +108,7 @@
 					</tr>
 					<tr>
 			            <th style="background-color: #D9D8D8">생년월일</th>
-			            <td><input type="text" name="user_birth1"> 년 <input type="text" name="user_birth2"> 월 <input type="text" name="user_birth3"> 일</td>
+			            <td><input type="text" name="year"> 년 <input type="text" name="month"> 월 <input type="text" name="day"> 일</td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">이메일</th>
@@ -101,16 +116,18 @@
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">전화번호</th>
-			            <td><input type="text" name="user-phone1"> - <input type="text" name="user-phone2"> - <input type="text" name="user-phone3"></td>
+			            <td><input type="text" name="phone1"> - <input type="text" name="phone2"> - <input type="text" name="phone3"></td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">주소</th>
-			            <td><input type="text" name="user_address"></td>
+			            <td><input type="text" name="user_address">
+			            	<input type="hidden" name="fromWeb" value="true"></td>
 			        </tr>
 					</tbody>
 				</table>	
 				<hr/>
-				<a class="btn btn-default pull-right">가입</a>
+				<button class="btn btn-default pull-right" type="submit" >가입</button>
+				</form>
 			</div>
 		</div>
 <!----------------------------------풋터---------------------------------->
@@ -122,6 +139,6 @@
 		
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type = "text/javascript" src="js/bootstrap.js"></script>
+<script type = "text/javascript" src="/js/bootstrap.js"></script>
 </body>
 </html>

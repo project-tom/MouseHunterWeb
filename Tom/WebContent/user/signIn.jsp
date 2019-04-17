@@ -4,7 +4,9 @@
 <%
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
-		System.out.print("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+		session.setAttribute("logined","true");
+		session.setAttribute("user_index", user_index);
+		System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 	}
 %>
 
@@ -12,32 +14,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>sign-In</title>
+<link rel="stylesheet" href="/css/bootstrap.css">
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
-	/* #sidebar1{ padding: 0px; width: 10%; height: auto; float: left; margin: 0px;} */
 	#main{ padding-bottom: 200px; width: 100%; height: auto; float: left; margin-top: 30px; }
-	/* #sidebar2{ padding: 0px; width: 10%; height: auto; float: right; margin: 0px;} */
 	#footer{ padding: 0px; clear: both; margin: 0px;}			
 	
 	@media screen and(max-width: 980px){
 		#page { width: 94%;} 
 		#main { width: 65%;}
-		#sidebar1 { width: 30%;}} #sidebar2 { width: 30%;}}
+		#sidebar1 { width: 30%;}} 
+		#sidebar2 { width: 30%;}}
 		
 	@media screen and(max-width: 700px){
 		#main { width: auto; float: none;}
-		#sidebar1 { width: auto; float: none;}}	 #sidebar2 { width: auto; float: none;}}	
+		#sidebar1 { width: auto; float: none;}}	 
+		#sidebar2 { width: auto; float: none;}}	
 		
 	@media screen and(max-width: 480px){
 		#header{ height: auto;} 
 		h2 { font-size: 24px;}
-		#sidebar1 { display: none;}} #sidebar2 { display: none;}}
+		#sidebar1 { display: none;}} 
+		#sidebar2 { display: none;}}
 	
 	#header, #main, #sidebar1, #footer{ border: solid 2px gray;}
 	
 	#header{background-color: white;}	
-	#sidebar1{background-color: green;}	#sidebar2{background-color: green;}	
+	#sidebar1{background-color: green;}	
+	#sidebar2{background-color: green;}	
 	#main{background-color: #B1EFFF;}	
 	#footer{background-color: blue;}	
 	
@@ -75,7 +80,7 @@
 		margin: auto;
 	}
 </style>
-<link rel="stylesheet" href="css/bootstrap.css">
+
 </head>
 <body>
 <div id="page">
@@ -90,13 +95,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="main.jsp">MouseHunter</a>
+					<a class="navbar-brand" href="signIn.jsp">MouseHunter</a>
 				</div>
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
 					<ul class="nav navbar-nav">
-						<li><a href="main.jsp">QnA</a></li>
-						<li><a href="bbs.jsp">Map</a></li>
-						<li><a href="bbs.jsp">MyPage</a></li>
+						<li><a href="../QnAList.qna?page=1">QnA</a></li>
+						<li><a href="map.jsp">Map</a></li>
+						<li><a href="myPage.jsp">MyPage</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
@@ -104,8 +109,8 @@
 								data-toggle="dropdown" role="button" aria-haspopup="true"
 								aria-expanded="false">접속하기<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li class="active"><a href="login.jsp">로그인</a></li>
-								<li><a href="join.jsp">회원가입</a></li>
+								<li class="active"><a href="signIn.jsp">로그인</a></li>
+								<li><a href="signUp.jsp">회원가입</a></li>
 							</ul>	
 						</li>
 					</ul>
@@ -121,12 +126,12 @@
 					<p style="font-size:24px;" class="card-title text-left" style="color:black;"><strong>쥐쥐쥐~^0^</strong></p><br>
 				</div>
 				<div class="card-body">
-			    	<form action="SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
+			    	<form action="../SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
 			       		<label for="inputEmail" class="sr-only"></label>
 			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" name="user_id" required autofocus><BR>
 			        	<label for="inputPassword" class="sr-only"></label>
 			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required><br>
-			        	<input type="hidden" name="fromWep" value="true">
+			        	<input type="hidden" name="fromWeb" value="true">
 			        	<div class="checkbox">
 			          	<label class="pull-left">
 			           		<input type="checkbox" value="remember-me" > 기억하기<br>
@@ -151,15 +156,15 @@
 			    <div class="carousel-inner">
 			
 			      <div class="item active">
-			        <img src="tom1.jpg" alt="Los Angeles" style="width:700px; height:700px;">
+			        <img src="/resource/tom1.jpg" alt="Los Angeles" style="width:700px; height:700px;">
 			      </div>
 			
 			      <div class="item">
-			        <img src="tom2.jpg" alt="Chicago" style="width:700px; height:700px;">
+			        <img src="/resource/tom2.jpg" alt="Chicago" style="width:700px; height:700px;">
 			      </div>
 			    
 			      <div class="item">
-			        <img src="tom3.jpg" alt="New York" style="width:700px; height:700px;">
+			        <img src="/resource/tom3.jpg" alt="New York" style="width:700px; height:700px;">
 			      </div>
 			  
 			    </div>
@@ -184,6 +189,6 @@
 		
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type = "text/javascript" src="js/bootstrap.js"></script>
+<script type = "text/javascript" src="/js/bootstrap.js"></script>
 </body>
 </html>

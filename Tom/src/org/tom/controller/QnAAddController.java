@@ -21,6 +21,7 @@ public class QnAAddController implements Action {
 		QnAVO vo = new QnAVO();
 		
 		int index = dao.getLastIndex();
+		int page = Integer.parseInt(request.getParameter("page"));
 		vo.setQna_index(index+1);
 		vo.setQna_title(request.getParameter("qna_title"));
 		vo.setQna_content(request.getParameter("qna_content"));
@@ -39,7 +40,7 @@ public class QnAAddController implements Action {
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("qna/qna.jsp?page="+page);
 		return actionForward;
 	}
 }
