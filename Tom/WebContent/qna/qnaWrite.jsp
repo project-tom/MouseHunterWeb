@@ -1,3 +1,4 @@
+<%@page import="org.apache.log4j.Logger"%>
 <%@page import="org.tom.persistence.UserDAOImpl"%>
 <%@page import="org.tom.domain.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,13 +7,16 @@
 <%!
 String user_index;
 boolean isAdmin = false;
+static Logger logger = Logger.getLogger("signUpdate.jsp");
 %>
 <%
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 	user_index = session.getAttribute("user_index").toString();
-	session.setAttribute("logined","true");
-	session.setAttribute("user_index", user_index);
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+	if(session.getAttribute("Admin").toString().equals("true")){
+		pageContext.setAttribute("isAdmin", true);
+		logger.debug("[Hi Admin]");
+	}
 }
 %>
 <%
@@ -67,7 +71,16 @@ boolean isAdmin = false;
 <body>
 <div id="page">
 <!---------------------------------- 상단바---------------------------------->
-		<%@ include file="/bar/memberHeader.jsp"%>
+		<c:choose>
+			<c:when test="${pageScope.isAdmin }">
+				<%@ include file="/bar/adminHeader.jsp"%>
+				<%logger.debug("[adminHeader]"); %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/bar/memberHeader.jsp"%>
+				<%logger.debug("[memberHeader]"); %>
+			</c:otherwise>
+		</c:choose>	
 		
 	<!--------------------------------게시판 쓰기 테이블-------------------------------------->
 	<div id="main">
@@ -83,7 +96,7 @@ boolean isAdmin = false;
 				<tr>
 					<th align="center">작성자</th>
 					<td><%=vo.getUser_name() %>
-						<input type="hidden" name="qna_author" value="${vo.getUser_name()}"></td>
+						<input type="hidden" name="qna_author" value="<%=vo.getUser_name() %>"></td>
 				</tr>
 				<tr>
 					<th align="center">내용</th>

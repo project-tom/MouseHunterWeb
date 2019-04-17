@@ -18,7 +18,7 @@ public class QnAInfoController implements Action {
 		request.setCharacterEncoding("UTF-8");
 		
 		QnADAOImpl dao = new QnADAOImpl();
-	
+		int page = Integer.parseInt(request.getParameter("page"));
 		
 		QnAVO info = dao.qnaInfo(Integer.parseInt(request.getParameter("qna_index")));
 		
@@ -26,7 +26,7 @@ public class QnAInfoController implements Action {
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("qna/qnaRead.jsp?page="+page);
 		return actionForward;
 	}
 }

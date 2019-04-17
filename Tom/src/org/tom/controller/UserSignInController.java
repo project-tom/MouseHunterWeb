@@ -40,6 +40,9 @@ public class UserSignInController implements Action {
 		if(result) {
 			// 로그인이 성공할시 해당 유저의 사용자 번호도 전달한다.
 			request.setAttribute("user_index_temp", new UserDAOImpl().userIndexReturn(vo));
+			if(request.getParameter("user_id").equals("admin")) {
+				request.setAttribute("admin", "true");
+			}
 		}else {
 			request.setAttribute("user_index_temp", "");
 		}

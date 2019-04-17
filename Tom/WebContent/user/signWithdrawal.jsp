@@ -9,11 +9,14 @@ static Logger logger = Logger.getLogger("signWithdrawal.jsp");
 	logger.debug("[Page Load...] : signWithdrawal.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
-		session.setAttribute("logined","true");
-		session.setAttribute("user_index", user_index);
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+		if(session.getAttribute("Admin").toString().equals("true")){
+			pageContext.setAttribute("isAdmin", true);
+			logger.debug("[Hi Admin]");
+		}
 	}
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,7 +54,16 @@ static Logger logger = Logger.getLogger("signWithdrawal.jsp");
 <body>
 <div id="page">
 <!----------------------------------상단바(nav)---------------------------------->		
-		<%@ include file="/bar/memberHeader.jsp"%>
+		<c:choose>
+			<c:when test="${pageScope.isAdmin }">
+				<%@ include file="/bar/adminHeader.jsp"%>
+				<%logger.debug("[adminHeader]"); %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/bar/memberHeader.jsp"%>
+				<%logger.debug("[memberHeader]"); %>
+			</c:otherwise>
+		</c:choose>	
 
 <!----------------------------------회원탈퇴 테이블---------------------------------->
 		<div id="main">

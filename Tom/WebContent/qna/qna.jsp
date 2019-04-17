@@ -1,14 +1,21 @@
 <%@page import="java.util.ArrayList"%>
+<%@page import="org.apache.log4j.Logger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%!
+static Logger logger = Logger.getLogger("qna.jsp");
+%>
 <%
+	logger.debug("[Page Load...] : qna.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-	String user_index = session.getAttribute("user_index").toString();
-	session.setAttribute("logined","true");
-	session.setAttribute("user_index", user_index);
-	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
-}
+		String user_index = session.getAttribute("user_index").toString();
+		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+		if(session.getAttribute("Admin").toString().equals("true")){
+			pageContext.setAttribute("isAdmin", true);
+			logger.debug("[Hi Admin]");
+		}
+	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -23,7 +30,16 @@
 <body>
 
 	<!---------------------------------- 상단바---------------------------------->
-	<%@ include file="/bar/memberHeader.jsp"%>
+	<c:choose>
+			<c:when test="${pageScope.isAdmin }">
+				<%@ include file="/bar/adminHeader.jsp"%>
+				<%logger.debug("[adminHeader]"); %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/bar/memberHeader.jsp"%>
+				<%logger.debug("[memberHeader]"); %>
+			</c:otherwise>
+		</c:choose>	
 		
 	<!--------------------------------게시판 테이블-------------------------------------->
 	<div class="container" style="padding-top: 100px;">
@@ -60,7 +76,7 @@
 			<c:forEach var="vo" items="${qnaList}" varStatus="status">
 				<tr>
 					<td>${qnaList.get(status.index).getQna_index() }</td>
-					<td><a href="qna/qna  .jsp?page=${param.page }&qna_index=${qnaList.get(status.index).getQna_index() }">${qnaList.get(status.index).getQna_title() }</a></td>
+					<td><a href="QnARead.qna?page=${param.page }&qna_index=${qnaList.get(status.index).getQna_index() }">${qnaList.get(status.index).getQna_title() }</a></td>
 					<td>${qnaList.get(status.index).getQna_author() }</td>
 					<td>${qnaList.get(status.index).getQna_date() }</td>
 					<td>${qnaList.get(status.index).getQna_readcount() }</td>

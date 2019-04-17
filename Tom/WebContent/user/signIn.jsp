@@ -9,12 +9,14 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 	logger.debug("[Page Load...] : signIn.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
-		session.setAttribute("logined","true");
-		session.setAttribute("user_index", user_index);
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+		if(session.getAttribute("Admin").toString().equals("true")){
+			pageContext.setAttribute("isAdmin", true);
+			logger.debug("[Hi Admin]");
+		}
 	}
 %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -89,8 +91,18 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 </head>
 <body>
 <div id="page">
-<!----------------------------------상단바(nav)---------------------------------->		
-		<%@ include file="/bar/memberHeader.jsp"%>
+<!----------------------------------상단바(nav)---------------------------------->	
+		<c:choose>
+			<c:when test="${pageScope.isAdmin }">
+				<%@ include file="/bar/adminHeader.jsp"%>
+				<%logger.debug("[adminHeader]"); %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/bar/memberHeader.jsp"%>
+				<%logger.debug("[memberHeader]"); %>
+			</c:otherwise>
+		</c:choose>	
+		
 
 <!----------------------------------main안에 로그인---------------------------------->
 		<div id="main">
@@ -102,7 +114,7 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 				<div class="card-body">
 			    	<form action="../SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
 			    	
-			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요" name="user_id" required autofocus>
+			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요 " name="user_id" required autofocus>
 			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required>
 			        	
 			        	<input type="hidden" name="fromWeb" value="true">
