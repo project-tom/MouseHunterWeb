@@ -18,9 +18,10 @@ public class QnAModifyController implements Action {
 		request.setCharacterEncoding("UTF-8");
 		QnADAOImpl dao = new QnADAOImpl();
 		QnAVO vo = new QnAVO();
-		
+		int page = Integer.parseInt(request.getParameter("page"));
 		vo.setQna_title(request.getParameter("qna_title"));
 		vo.setQna_content(request.getParameter("qna_content"));
+		vo.setQna_index(Integer.parseInt(request.getParameter("qna_index")));
 		
 		
 		
@@ -29,7 +30,7 @@ public class QnAModifyController implements Action {
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("QnAList.qna?page="+page);
 		return actionForward;
 	}
 }

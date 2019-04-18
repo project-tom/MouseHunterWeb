@@ -146,9 +146,10 @@ public class QnADAOImpl extends DAO implements QnADAO {
 	@Override
 	public boolean qnaAdd(QnAVO vo) {
 		try {
-			pstmt = conn.prepareStatement("INSERT INTO qna(qna_index,qna_title, qna_content, qna_author, qna_date, qna_pass,qna_parentnum, qna_answer) VALUES (?,?,?,?,now(),?,?,?)");
+			pstmt = conn.prepareStatement("INSERT INTO qna(qna_index, qna_title, qna_content, qna_author, qna_date, qna_pass,qna_parentnum, qna_answer) VALUES (?,?,?,?,now(),?,?,?)");
 			pstmt.setInt(1, vo.getQna_index());
 			pstmt.setString(2, vo.getQna_title());
+			logger.debug(vo.getQna_title());
 			pstmt.setString(3, vo.getQna_content());
 			pstmt.setString(4, vo.getQna_author());
 			pstmt.setString(5, vo.getQna_pass());
@@ -173,9 +174,10 @@ public class QnADAOImpl extends DAO implements QnADAO {
 	@Override
 	public boolean qnaModify(QnAVO vo) {
 		try {
-			pstmt = conn.prepareStatement("UPDATE qna SET qna_title = ?, qna_content = ?");
+			pstmt = conn.prepareStatement("UPDATE qna SET qna_title = ?, qna_content = ? WHERE qna_index = ?");
 			pstmt.setString(1, vo.getQna_title());
 			pstmt.setString(2, vo.getQna_content());
+			pstmt.setInt(3,vo.getQna_index());
 			pstmt.executeUpdate();
 			logger.debug("[QnA Modify...] : Success");
 			return true;

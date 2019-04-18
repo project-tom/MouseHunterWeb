@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.tom.controller.QnAAddController;
+import org.tom.controller.QnADeleteController;
 import org.tom.controller.QnAInfoController;
 import org.tom.controller.QnAListController;
+import org.tom.controller.QnAModifyController;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
 
@@ -57,7 +59,11 @@ public class QnAFrontController extends HttpServlet {
 			actionForward = action.execute(request, response);
 		}
 		if(command.equals("/QnAModify.qna")) {
-			action = new QnAAddController();
+			action = new QnAModifyController();
+			actionForward = action.execute(request, response);
+		}
+		if(command.equals("/QnADelete.qna")) {
+			action = new QnADeleteController();
 			actionForward = action.execute(request, response);
 		}
 		if(command.equals("/QnARead.qna")) {

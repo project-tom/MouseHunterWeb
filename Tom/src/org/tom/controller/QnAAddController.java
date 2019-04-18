@@ -6,14 +6,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.com.encryption.PasswordEncryption;
 import org.tom.domain.QnAVO;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
 import org.tom.persistence.QnADAOImpl;
 
-public class QnAAddController implements Action {
 
+public class QnAAddController implements Action {
+	static Logger logger = Logger.getLogger(QnAAddController.class);
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -25,6 +27,8 @@ public class QnAAddController implements Action {
 		int page = Integer.parseInt(request.getParameter("page"));
 		vo.setQna_index(index+1);
 		vo.setQna_title(request.getParameter("qna_title"));
+		
+		logger.debug("title is : " + request.getParameter("qna_title"));
 		vo.setQna_content(request.getParameter("qna_content"));
 		vo.setQna_author(request.getParameter("qna_author"));
 		vo.setQna_pass(new PasswordEncryption(request.getParameter("qna_pass")).getPass());

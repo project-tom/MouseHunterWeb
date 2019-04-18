@@ -1,3 +1,4 @@
+<%@page import="org.tom.persistence.QnADAOImpl"%>
 <%@page import="org.tom.domain.QnAVO"%>
 <%@page import="org.apache.log4j.Logger"%>
 <%@page import="org.tom.persistence.UserDAOImpl"%>
@@ -15,14 +16,14 @@ static Logger logger = Logger.getLogger("qnaWrite.jsp");
 	logger.debug("[Page Load...] : qnaWrite.jsp?flag="+request.getParameter("flag"));
 	logger.debug(""+request.getAttribute("info"));
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-	user_index = session.getAttribute("user_index").toString();
-	pageContext.setAttribute("userLogined", "true");
-	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
-	if(session.getAttribute("Admin").toString().equals("true")){
-		pageContext.setAttribute("isAdmin", true);
-		logger.debug("[Hi Admin]");
+		user_index = session.getAttribute("user_index").toString();
+		pageContext.setAttribute("userLogined", "true");
+		System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
+		if(session.getAttribute("Admin").toString().equals("true")){
+			pageContext.setAttribute("isAdmin", true);
+			logger.debug("[Hi Admin]");
+		}
 	}
-}
 %>
 <%
 	UserVO vo = new UserVO();
@@ -30,10 +31,16 @@ static Logger logger = Logger.getLogger("qnaWrite.jsp");
 	if(user_index != null){
 		vo = dao.userInfo(Integer.parseInt(user_index));
 	}
+	if(!request.getParameter("flag").equals("write")){
+		QnAVO info = new QnAVO();
+		QnADAOImpl dao_ = new QnADAOImpl();
+		info = dao_.qnaInfo(Integer.parseInt(request.getParameter("index")));
+		pageContext.setAttribute("info", info);
+	}
+	
+	
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:if test="${empty user_index }">
 	<c:redirect url="../QnAList.qna?page=1"></c:redirect>
@@ -108,31 +115,51 @@ static Logger logger = Logger.getLogger("qnaWrite.jsp");
 			<form action="../${uri}.qna?page=${param.page }" method="post">
 			<table class="table" >
 				<caption align="left"><strong>QnA</strong></caption>
+				<c:if test="${param.flag == 'modify' }">
+					<c:set var="content" value="${info.getQna_content() }"></c:set>
+					<c:set var="title" value="${info.getQna_title() }"></c:set>
+				</c:if>
 				<tbody style="background-color: #E4DBD9">
 				<tr>
 					<th align="center">제목</th>
-					<td><input type="text" name="qna_title" style="width:1000px;"/></td>
+					<td>
+					<c:choose>
+						<c:when test="${param.flag == 'reply' }">
+							${info.getQna_title() } 글에 대한 답글 입니다.
+							<input type="hidden" name="qna_title" value="${info.getQna_title() } 글에 대한 답글 입니다.">
+						</c:when>
+						<c:otherwise>
+							<input type="text" name="qna_title" style="width:1000px;" value="${title }">
+						</c:otherwise>
+					</c:choose>
+					</td>
 				</tr>
 				<tr>
 					<th align="center">작성자</th>
 					<td><%=vo.getUser_name() %>
-						<input type="hidden" name="qna_author" value="<%=vo.getUser_name() %>"></td>
+						<input type="hidden" name="qna_author" value="<%=vo.getUser_name() %>">
+						<input type="hidden" name="isAdmin" value="${isAdmin }">
+						</td>
 				</tr>
 				<c:if test="${param.flag == 'reply' }">
 					<tr>
 						<th align="center">문의</th>
-						<td></td>
+						<td> ${info.getQna_content() }</td>
 					</tr>
 				</c:if>
 				<tr>
 					<th align="center">내용</th>
-					<td><input type="text" name="qna_content" style="width:1000px; height:500px;"></td>
+					<td>
+						<input type="text" name="qna_content" style="width:1000px; height:500px;" value ="${content }">
+						<input type="hidden" name="qna_index" value="${info.getQna_index()}">
+					</td>
 				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input type="password" name="qna_pass" />
-						<input type="hidden" name="isAdmin" value="<%=isAdmin%>"></td>
-				</tr>
+				<c:if test="${param.flag != 'modify' }">
+					<tr>
+						<th>비밀번호</th>
+						<td><input type="password" name="qna_pass" /></td>
+					</tr>
+				</c:if>
 				</tbody>
 			</table>
 			<hr/>

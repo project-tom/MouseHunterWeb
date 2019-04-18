@@ -26,7 +26,8 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="vo" value="${info }"></c:set>
+<c:set var="info" value="${info }"></c:set>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -34,9 +35,7 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 <style>
 	#page{ padding: 5px; width: auto; margin: 20px auto;}
 	#header{ height: 50px; margin: 0px;}
-	/* #sidebar1{ padding: 0px; width: 10%; height: auto; float: left; margin: 0px;} */
 	#main{ padding-bottom: 200px; width: 100%; height: auto; float: left; margin-top: 30px; }
-	/* #sidebar2{ padding: 0px; width: 10%; height: auto; float: right; margin: 0px;} */
 	#footer{ padding: 0px; clear: both; margin: 0px;}			
 	
 	@media screen and(max-width: 980px){
@@ -86,32 +85,36 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 						<strong>QnA</strong>
 					</td>
 					<td colspan="3" align="right">
-						<form action="??" method="get">	
-							<select>
-								<option value="title" selected="selected">제목</option>
-								<option value="author">작성자</option>
+						<form action="QnASearch.qna" method="get">	
+							<select name="search_criteria">
+								<option value="qna_title" selected="selected">제목</option>
+								<option value="qna_author">작성자</option>
 							</select>
-							<input type="text" name="search" >
-						 <input type="submit" value="검색" class="btn btn-xs">	
+							
+							<input type="text" name="search" value="${param.search}" >
+							<input type="hidden" name="page" value="1">
+						 <input type="submit" value="검색" class="btn btn-xs">
 						</form>
 					</td>
 				</tr>
 				<tr>
 					<th align="center">제목</th>
-					<td>${vo.getQna_title() }</td>
+					<td>${info.getQna_title() }</td>
 					<th align="center">작성자</th>
-					<td>${vo.getQna_author() }</td>
+					<td>${info.getQna_author() }</td>
 				</tr>	
 				<tr>
 					<th align="center">내용</th>
-					<td colspan="3" >${vo.getQna_content()}</td>
+					<td colspan="3" >${info.getQna_content()}</td>
 				</tr>
 				</tbody>
 			</table>	
 			<hr/>
-			<a class="btn btn-default pull-right">목록</a>
-			<a class="btn btn-default pull-right">삭제</a>
-			<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }&flag=${pageScope.flag}">${pageScope.btn}</a>
+			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
+			<c:if test="${userLogined == 'true' }">
+				<a class="btn btn-default pull-right" href="../QnADelete.qna?page=${param.page }&index=${info.getQna_index()}">삭제</a>
+				<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }&flag=${pageScope.flag}&index=${info.getQna_index()}">${pageScope.btn}</a>
+			</c:if>
 			
 			
 			

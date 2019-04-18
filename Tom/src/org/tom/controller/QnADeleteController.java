@@ -19,15 +19,15 @@ public class QnADeleteController implements Action {
 		
 		QnADAOImpl dao = new QnADAOImpl();
 		QnAVO vo = new QnAVO();
-		
-		vo.setQna_index(Integer.parseInt(request.getParameter("qna_index")));
+		int page = Integer.parseInt(request.getParameter("page"));
+		vo.setQna_index(Integer.parseInt(request.getParameter("index")));
 		
 		boolean result = dao.qnaDelete(vo);
 
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("QnAList.qna?page="+page);
 		return actionForward;
 	}
 }
