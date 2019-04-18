@@ -19,8 +19,6 @@ static Logger logger = Logger.getLogger("qna.jsp");
 	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <html>
 <head>
@@ -32,15 +30,15 @@ static Logger logger = Logger.getLogger("qna.jsp");
 
 	<!---------------------------------- 상단바---------------------------------->
 	<c:choose>
-			<c:when test="${pageScope.isAdmin }">
-				<%@ include file="/bar/adminHeader.jsp"%>
-				<%logger.debug("[adminHeader]"); %>
-			</c:when>
-			<c:otherwise>
-				<%@ include file="/bar/memberHeader.jsp"%>
-				<%logger.debug("[memberHeader]"); %>
-			</c:otherwise>
-		</c:choose>	
+		<c:when test="${pageScope.isAdmin }">
+			<%@ include file="/bar/adminHeader.jsp"%>
+			<%logger.debug("[adminHeader]"); %>
+		</c:when>
+		<c:otherwise>
+			<%@ include file="/bar/memberHeader.jsp"%>
+			<%logger.debug("[memberHeader]"); %>
+		</c:otherwise>
+	</c:choose>	
 		
 	<!--------------------------------게시판 테이블-------------------------------------->
 	<div class="container" style="padding-top: 100px;">

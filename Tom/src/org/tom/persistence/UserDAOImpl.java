@@ -176,7 +176,7 @@ public class UserDAOImpl extends DAO implements UserDAO{
 				vo.setUser_address(rs.getString("user_address"));
 				vo.setUser_birth(rs.getDate("user_birth"));
 				vo.setUser_gender(rs.getString("user_gender"));
-				vo.setUser_reg(rs.getDate("user_gender"));
+				vo.setUser_reg(rs.getDate("user_reg"));
 				
 				list.add(vo);
 				
@@ -243,6 +243,28 @@ public class UserDAOImpl extends DAO implements UserDAO{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}finally {
+			try {
+				close();
+			} catch (Exception e) {}
+		}
+	}
+	
+	public int totalUser() {
+		try {
+			pstmt = conn.prepareStatement("SELECT count(*) AS count FROM user");
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			int total = rs.getInt("count");
+			
+			logger.debug("[Total User] : "+total);
+			return total;
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			logger.warn("[Total Check] : Fail");
+			return 0;
 		}finally {
 			try {
 				close();

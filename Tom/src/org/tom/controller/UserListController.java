@@ -18,14 +18,16 @@ public class UserListController implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
 		UserDAOImpl dao = new UserDAOImpl();
-		
+		int total = dao.totalUser();
+		int page = Integer.parseInt(request.getParameter("page"));
+		dao = new UserDAOImpl();
 		ArrayList<UserVO> userList = dao.userInfoList(); 
 		
-		
+		request.setAttribute("totalUser", total);
 		request.setAttribute("userList", userList);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("admin/memberSearch.jsp?page="+page);
 		
 		return actionForward;
 	}

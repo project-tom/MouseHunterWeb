@@ -17,6 +17,7 @@ public class UserDeleteController implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 
 		UserDAOImpl dao = new UserDAOImpl();
+		int page = Integer.parseInt(request.getParameter("page"));
 		UserVO vo = new UserVO();
 		vo.setUser_id(request.getParameter("user_id"));
 		
@@ -24,7 +25,7 @@ public class UserDeleteController implements Action {
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("");
+		actionForward.setURI("UserList.user?page="+page);
 		
 		return actionForward;
 	}

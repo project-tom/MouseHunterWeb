@@ -77,20 +77,24 @@
 			<th align="center">이름</th>
 			<th align="center">성별</th>
 			<th align="center">이메일</th>
-			<th align="center">전화번호</th>
 			<th align="center">휴대폰</th>
+			<th align="center">생일</th>
 			<th align="center">주소</th>
 			<th align="center">회원삭제</th>
 		</tr>
 		</thead>
 		<tbody style="background-color: #B1EFFF">
-			<c:forEach var="vo" items="${qnaList}" varStatus="status">
+			<c:forEach var="vo" items="${userList}" varStatus="status">
 				<tr>
-					<td><!-- 아이디 --></td>
-					<td><a href="qna/qna  .jsp?page=${param.page }&qna_index=${qnaList.get(status.index).getQna_index() }">${qnaList.get(status.index).getQna_title() }</a></td>
-					<td>${qnaList.get(status.index).getQna_author() }</td>
-					<td>${qnaList.get(status.index).getQna_date() }</td>
-					<td>${qnaList.get(status.index).getQna_readcount() }</td>
+					<td>${userList.get(status.index).getUser_id()}</td>
+					<td>${userList.get(status.index).getUser_name()}</td>
+					<td>${userList.get(status.index).getUser_gender()}</td>
+					<td>${userList.get(status.index).getUser_email()}</td>
+					<td>${userList.get(status.index).getUser_phone()}</td>
+					<td>${userList.get(status.index).getUser_birth()}</td>
+					<td>${userList.get(status.index).getUser_address()}</td>
+					<td><a class="btn btn-default" href="../Delete.user?user_id=${userList.get(status.index).getUser_id()}&page=${param.page}">삭제</a></td>
+					
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -101,7 +105,7 @@
 		<ul class="pagination">
 		
 			<c:set var="currentPage" value="${param.page}"></c:set>
-			<c:set var="total" value="${totalQnA}"></c:set>
+			<c:set var="total" value="${totalUser}"></c:set>
 			<c:choose>
 				<c:when test="${total%10 == 0}">
 					<c:set var="maxPage" value="${total/10}"></c:set>
@@ -112,7 +116,7 @@
 			</c:choose>
 			
 		
-			<c:set var="uri" value="QnAList.qna?page="></c:set>
+			<c:set var="uri" value="UserList.user?page="></c:set>
 		
 			<c:if test="${currentPage > 1}"><li><a href="${uri}${currentPage-1 }">&lt;</a></c:if>
 			<c:if test="${currentPage-2 > 0}"><li><a href="${uri}${currentPage-2 }">${currentPage-2 }</a></c:if>

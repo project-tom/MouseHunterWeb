@@ -22,7 +22,7 @@
 						aria-expanded="false">MyPage<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="active"><a href="../user/logout.jsp">로그아웃</a></li>
-						<li><a href="../user/memberSearch.jsp">회원검색</a></li>
+						<li><a href="../UserList.user?page=1">회원검색</a></li>
 					</ul>	
 				</li>
 				<li>관리자 모드</li>
