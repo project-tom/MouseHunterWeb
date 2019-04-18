@@ -79,7 +79,7 @@ static Logger logger = Logger.getLogger("qnaSearch.jsp");
 			<c:forEach var="vo" items="${qnaList}" varStatus="status">
 				<tr>
 					<td>${qnaList.get(status.index).getQna_index() }</td>
-					<td><a href="qna/qna  .jsp?page=${param.page }&qna_index=${qnaList.get(status.index).getQna_index() }">${qnaList.get(status.index).getQna_title() }</a></td>
+					<td><a href="QnARead.qna?page=${param.page }&qna_index=${qnaList.get(status.index).getQna_index() }">${qnaList.get(status.index).getQna_title() }</a></td>
 					<td>${qnaList.get(status.index).getQna_author() }</td>
 					<td>${qnaList.get(status.index).getQna_date() }</td>
 					<td>${qnaList.get(status.index).getQna_readcount() }</td>

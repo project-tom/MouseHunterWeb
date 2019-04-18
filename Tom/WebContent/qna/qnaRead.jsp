@@ -1,3 +1,4 @@
+<%@page import="org.tom.persistence.QnADAOImpl"%>
 <%@page import="org.apache.log4j.Logger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -28,6 +29,11 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="info" value="${info }"></c:set>
 
+<%
+	QnADAOImpl dao = new QnADAOImpl();
+	pageContext.setAttribute("dao", dao);
+%>
+<c:set var="exist" value=""></c:set>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -113,7 +119,9 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
 			<c:if test="${userLogined == 'true' }">
 				<a class="btn btn-default pull-right" href="../QnADelete.qna?page=${param.page }&index=${info.getQna_index()}">삭제</a>
-				<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }&flag=${pageScope.flag}&index=${info.getQna_index()}">${pageScope.btn}</a>
+				<c:if test="${!dao.answer(info.getQna_index())}">
+					<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }&flag=${pageScope.flag}&index=${info.getQna_index()}">${pageScope.btn}</a>
+				</c:if>
 			</c:if>
 			
 			

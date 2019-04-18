@@ -262,5 +262,30 @@ public class QnADAOImpl extends DAO implements QnADAO {
 			} catch (Exception e) {}
 		}
 	}
+	
+	public boolean answer(int qna_index) {
+		try {
+			pstmt = conn.prepareStatement("SELECT count(*) AS count FROM qna WHERE qna_parentnum = (SELECT qna_parentnum FROM qna WHERE qna_index = ?)");
+			pstmt.setInt(1, qna_index);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1) == 2) {
+					logger.debug("exist");
+					return true; 
+				}
+			}
+			
+			return false;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			logger.warn("[QnA Last Index Load] : Fail");
+			return false;
+		}finally {
+			try {
+				close();
+			} catch (Exception e) {}
+		}
+	}
 
 }
