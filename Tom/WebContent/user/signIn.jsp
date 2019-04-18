@@ -9,6 +9,7 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 	logger.debug("[Page Load...] : signIn.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
+		pageContext.setAttribute("userLogined", "true");
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			pageContext.setAttribute("isAdmin", true);
@@ -107,27 +108,14 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 <!----------------------------------main안에 로그인---------------------------------->
 		<div id="main">
 			<div class="card align-middle" style="" id="reldiv1">
-				<div class="card-title">
-					<p style="font-size:24px;" class="card-title text-left" style="color:black;"><strong>쥐를 잡자 쥐를 잡자</strong></p>
-					<p style="font-size:24px;" class="card-title text-left" style="color:black;"><strong>쥐쥐쥐~^0^</strong></p><br>
-				</div>
-				<div class="card-body">
-			    	<form action="../SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
-			    	
-			        	<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요 " name="user_id" required autofocus>
-			        	<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required>
-			        	
-			        	<input type="hidden" name="fromWeb" value="true">
-			        	
-			        	<div class="checkbox">
-			          	<label class="pull-left">
-			           		<input type="checkbox" value="remember-me" > 기억하기
-			          	</label>
-			          	
-			          	<button class="btn pull-right " type="submit" >로그인</button>
-		        		</div>
-		     		</form>
-				</div>
+				<c:choose>
+					<c:when test="${pageScope.userLogined == 'true'}">
+						<%@ include file="/box/userBox.jsp" %>
+					</c:when>
+					<c:otherwise>
+						<%@ include file="/box/loginBox.jsp" %>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 <!----------------------------------main안에-슬라이드---------------------------------->

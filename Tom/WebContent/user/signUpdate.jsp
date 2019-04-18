@@ -12,18 +12,17 @@
 	logger.debug("[Page Load...] : signUpdate.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
+		UserVO vo = new UserVO();
+		UserDAOImpl dao = new UserDAOImpl();
+		vo = dao.userInfo(Integer.parseInt(user_index));
+		pageContext.setAttribute("user_index", user_index);
+		pageContext.setAttribute("info", vo);
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			pageContext.setAttribute("isAdmin", true);
 			logger.debug("[Hi Admin]");
 		}
 	}
-%>
-
-<%
-	UserVO vo = new UserVO();
-	UserDAOImpl dao = new UserDAOImpl();
-	vo = dao.userInfo(Integer.parseInt(user_index));
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -84,7 +83,7 @@
 					<tbody >
 					<tr>
 						<th align="center" style="background-color:#D9D8D8" >아이디</th>
-						<td><input type="text" name="user_id" style="width:300px;" value="<%=vo.getUser_id()%>"></td>
+						<td><input type="text" name="user_id" style="width:300px;" value="${pageScope.info.getUser_id() }"></td>
 					</tr>	
 					<tr>
 						<th align="center" style="background-color: #D9D8D8">비밀번호</th>
@@ -92,7 +91,7 @@
 					</tr>
 					<tr>
 						<th align="center" style="background-color:#D9D8D8" >이름</th>
-						<td><input type="text" name="user_name" style="width:300px;" value="<%=vo.getUser_name()%>"></td>
+						<td><input type="text" name="user_name" style="width:300px;" value="${pageScope.info.getUser_name() }"></td>
 					</tr>
 					<tr>
 			            <th style="background-color: #D9D8D8">생년월일</th>
@@ -100,7 +99,7 @@
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">이메일</th>
-			            <td><input type="text" name="user_email" value="<%=vo.getUser_email()%>"></td>
+			            <td><input type="text" name="user_email" value="${pageScope.info.getUser_email() }"></td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">전화번호</th>
@@ -108,8 +107,8 @@
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">주소</th>
-			            <td><input type="text" name="user_address" value="<%=vo.getUser_address()%>">
-			            	<input type="hidden" name="user_index" value="${user_index }"></td>
+			            <td><input type="text" name="user_address" value="${pageScope.info.getUser_address() }">
+			            	<input type="hidden" name="user_index" value="${pageScope.user_index }"></td>
 			        </tr>
 					</tbody>
 				</table>	
