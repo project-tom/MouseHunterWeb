@@ -12,6 +12,7 @@
 	logger.debug("[Page Load...] : signUpdate.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
+		pageContext.setAttribute("userLogined", "true");
 		UserVO vo = new UserVO();
 		UserDAOImpl dao = new UserDAOImpl();
 		vo = dao.userInfo(Integer.parseInt(user_index));

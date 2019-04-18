@@ -1,3 +1,4 @@
+<%@page import="org.tom.domain.QnAVO"%>
 <%@page import="org.apache.log4j.Logger"%>
 <%@page import="org.tom.persistence.UserDAOImpl"%>
 <%@page import="org.tom.domain.UserVO"%>
@@ -7,11 +8,15 @@
 <%!
 String user_index;
 boolean isAdmin = false;
-static Logger logger = Logger.getLogger("signUpdate.jsp");
+static Logger logger = Logger.getLogger("qnaWrite.jsp");
 %>
 <%
+	
+	logger.debug("[Page Load...] : qnaWrite.jsp?flag="+request.getParameter("flag"));
+	logger.debug(""+request.getAttribute("info"));
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 	user_index = session.getAttribute("user_index").toString();
+	pageContext.setAttribute("userLogined", "true");
 	System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 	if(session.getAttribute("Admin").toString().equals("true")){
 		pageContext.setAttribute("isAdmin", true);
@@ -33,6 +38,21 @@ static Logger logger = Logger.getLogger("signUpdate.jsp");
 <c:if test="${empty user_index }">
 	<c:redirect url="../QnAList.qna?page=1"></c:redirect>
 </c:if>
+
+<c:choose>
+	<c:when test="${param.flag == 'write' }">
+		<c:set var="uri" value="QnAAdd"></c:set>
+		<c:set var="btn" value="등록"></c:set>
+	</c:when>
+	<c:when test="${param.flag == 'modify' }">
+		<c:set var="uri" value="QnAModify"></c:set>
+		<c:set var="btn" value="수정"></c:set>
+	</c:when>
+	<c:when test="${param.flag == 'reply' }">
+		<c:set var="uri" value="QnAAdd"></c:set>
+		<c:set var="btn" value="답변등록"></c:set>
+	</c:when>
+</c:choose>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -85,7 +105,7 @@ static Logger logger = Logger.getLogger("signUpdate.jsp");
 	<!--------------------------------게시판 쓰기 테이블-------------------------------------->
 	<div id="main">
 		<div class="container" style="padding-top: 100px;">
-			<form action="../QnAAdd.qna?page=${param.page }" method="post">
+			<form action="../${uri}.qna?page=${param.page }" method="post">
 			<table class="table" >
 				<caption align="left"><strong>QnA</strong></caption>
 				<tbody style="background-color: #E4DBD9">
@@ -98,6 +118,12 @@ static Logger logger = Logger.getLogger("signUpdate.jsp");
 					<td><%=vo.getUser_name() %>
 						<input type="hidden" name="qna_author" value="<%=vo.getUser_name() %>"></td>
 				</tr>
+				<c:if test="${param.flag == 'reply' }">
+					<tr>
+						<th align="center">문의</th>
+						<td></td>
+					</tr>
+				</c:if>
 				<tr>
 					<th align="center">내용</th>
 					<td><input type="text" name="qna_content" style="width:1000px; height:500px;"></td>
@@ -110,7 +136,7 @@ static Logger logger = Logger.getLogger("signUpdate.jsp");
 				</tbody>
 			</table>
 			<hr/>
-			<button class="btn btn-default pull-right " type="submit" >등록</button>
+			<button class="btn btn-default pull-right " type="submit" >${btn}</button>
 			</form>
 			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
 		</div>

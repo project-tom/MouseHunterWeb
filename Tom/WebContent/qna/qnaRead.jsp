@@ -9,11 +9,20 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 	logger.debug("[Page Load...] : qnaRead.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
+		String btn = "수정";
+		String flag = "";
+		pageContext.setAttribute("userLogined", "true");
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
+			btn="답글";
 			pageContext.setAttribute("isAdmin", true);
 			logger.debug("[Hi Admin]");
 		}
+		if(btn.equals("수정")) flag="modify";
+		if(btn.equals("답글")) flag="reply";
+		pageContext.setAttribute("btn", btn);
+		pageContext.setAttribute("flag", flag);
+		logger.debug("btn : "+btn);
 	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -100,9 +109,13 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 				</tbody>
 			</table>	
 			<hr/>
-			<a class="btn btn-default pull-right">수정</a>
-			<a class="btn btn-default pull-right">삭제</a>
 			<a class="btn btn-default pull-right">목록</a>
+			<a class="btn btn-default pull-right">삭제</a>
+			<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }&flag=${pageScope.flag}">${pageScope.btn}</a>
+			
+			
+			
+			
 		</div>
 	</div>
 	<!----------------------------------풋터---------------------------------->

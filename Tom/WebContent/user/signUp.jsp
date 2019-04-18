@@ -10,6 +10,7 @@ String user_index;
 	logger.debug("[Page Load...] : signUp.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		user_index = session.getAttribute("user_index").toString();
+		pageContext.setAttribute("userLogined", "true");
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			pageContext.setAttribute("isAdmin", true);

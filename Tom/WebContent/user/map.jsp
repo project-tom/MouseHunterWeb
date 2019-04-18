@@ -9,8 +9,7 @@ static Logger logger = Logger.getLogger("map.jsp");
 	logger.debug("[Page Load...] : map.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
-		session.setAttribute("logined","true");
-		session.setAttribute("user_index", user_index);
+		pageContext.setAttribute("userLogined", "true");
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 	}
 %>

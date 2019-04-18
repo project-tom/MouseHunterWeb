@@ -86,7 +86,7 @@
 		<tbody style="background-color: #B1EFFF">
 			<c:forEach var="vo" items="${qnaList}" varStatus="status">
 				<tr>
-					<td>${qnaList.get(status.index).getQna_index() }</td>
+					<td><!-- 아이디 --></td>
 					<td><a href="qna/qna  .jsp?page=${param.page }&qna_index=${qnaList.get(status.index).getQna_index() }">${qnaList.get(status.index).getQna_title() }</a></td>
 					<td>${qnaList.get(status.index).getQna_author() }</td>
 					<td>${qnaList.get(status.index).getQna_date() }</td>

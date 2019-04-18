@@ -56,6 +56,10 @@ public class QnAFrontController extends HttpServlet {
 			action = new QnAAddController();
 			actionForward = action.execute(request, response);
 		}
+		if(command.equals("/QnAModify.qna")) {
+			action = new QnAAddController();
+			actionForward = action.execute(request, response);
+		}
 		if(command.equals("/QnARead.qna")) {
 			action = new QnAInfoController();
 			actionForward = action.execute(request, response);
