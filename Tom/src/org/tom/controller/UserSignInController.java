@@ -33,7 +33,11 @@ public class UserSignInController implements Action {
 		// dao에 값을 전달하기 위한 vo 객체 생성
 		UserVO vo = new UserVO();
 		vo.setUser_id(request.getParameter("user_id"));
-		vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
+		if(request.getParameter("fromWeb").equals("true")){
+			vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
+		}else {
+			vo.setUser_pw(request.getParameter("user_pw"));
+		}
 		// dao 의 출력 결과를 result에 저장
 		// userSignIn의 반환형은 boolean으로 id와 pw 가 DB의 정보와 일치하면 true, 아니면 false를 반환한다.
 		boolean result= dao.userSignIn(vo);

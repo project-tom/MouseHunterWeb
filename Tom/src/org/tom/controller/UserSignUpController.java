@@ -55,9 +55,13 @@ public class UserSignUpController implements Action{
 								request.getParameter("day");
 				
 				date= format.parse(birth);
+				vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
+			}else {
+				vo.setUser_pw(request.getParameter("user_pw"));
 			}
+			
 			vo.setUser_id(request.getParameter("user_id"));
-			vo.setUser_pw(new PasswordEncryption(request.getParameter("user_pw")).getPass());
+			
 			vo.setUser_name(request.getParameter("user_name"));
 			vo.setUser_email(request.getParameter("user_email"));
 			vo.setUser_birth(date);

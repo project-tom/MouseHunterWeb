@@ -13,4 +13,4 @@
     pageEncoding="UTF-8"%>
 
 <%=request.getAttribute("result").toString()%>
-[<%=request.getAttribute("user_index") %>]
+[<%=request.getAttribute("user_index_temp") %>]
