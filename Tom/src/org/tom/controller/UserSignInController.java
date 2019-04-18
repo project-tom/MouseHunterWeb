@@ -53,9 +53,9 @@ public class UserSignInController implements Action {
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
 		if(request.getParameter("fromWeb").equals("true")) {
-			actionForward.setURI("user/signInTemp.jsp");
+			actionForward.setURI("/user/signInTemp.jsp");
 		}else {
-			actionForward.setURI("forApps/SignInResultForApp.jsp");
+			actionForward.setURI("/forApps/SignInResultForApp.jsp");
 		}
 		
 		

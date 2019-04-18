@@ -12,7 +12,7 @@ public class PasswordEncryption {
     
     public PasswordEncryption(String msg) throws IOException{
         try {        	
-        	File file = new File("C:/passKey/key.txt");
+        	File file = new File("/usr/local/apache-tomcat-8.5.39/webapps/ROOT/passKey/key.txt");
         	FileReader filereader = new FileReader(file);
             int singleCh = 0;
             while((singleCh = filereader.read()) != -1){

@@ -25,7 +25,7 @@
 						<li><a href="../UserList.user?page=1">회원검색</a></li>
 					</ul>	
 				</li>
-				<li>관리자 모드</li>
+				<li><a>관리자 모드</a></li>
 			</ul>
 		</div>
 	</nav>

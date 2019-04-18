@@ -56,7 +56,7 @@ public class UserModifyController implements Action {
 		request.setAttribute("result", result);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("user/signIn.jsp");
+		actionForward.setURI("/user/signIn.jsp");
 		
 		return actionForward;
 	}

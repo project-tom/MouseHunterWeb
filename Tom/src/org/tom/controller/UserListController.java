@@ -27,7 +27,7 @@ public class UserListController implements Action {
 		request.setAttribute("userList", userList);
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("admin/memberSearch.jsp?page="+page);
+		actionForward.setURI("/admin/memberSearch.jsp?page="+page);
 		
 		return actionForward;
 	}

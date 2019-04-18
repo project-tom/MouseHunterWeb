@@ -37,7 +37,7 @@ public class PointListController implements Action {
 		
 		ActionForward actionForward = new ActionForward();
 		actionForward.setRedirect(false);
-		actionForward.setURI("forApps/pointListForApp.jsp");
+		actionForward.setURI("/forApps/pointListForApp.jsp");
 		return actionForward;
 		
 	}
