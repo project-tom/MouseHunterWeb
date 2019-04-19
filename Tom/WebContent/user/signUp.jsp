@@ -53,6 +53,29 @@ String user_index;
 
 </style>
 <link rel="stylesheet" href="/css/bootstrap.css">
+<script>
+function IDCheck(){
+	var url = "checkID.jsp?id="+document.userInfo.user_id.value;
+	open(url,
+		"CheckID",
+		"toolbar=no,location=no,status=no,scrollbars=no,menubar=no,resizable=no,width=300,height=200");
+}
+function inputIdChk(){
+    document.userInfo.idChecked.value ="unChecked";
+}
+function checkValue()
+{
+	var form = document.userInfo;
+	if(form.idChecked.value != "Checked"){
+        alert("아이디 중복체크를 해주세요!");
+        return false;
+    }
+	if(form.user_pw.value.indexOf(form.user_id.value)>-1){
+		alert("비밀번호에 ID가 포함되어 있습니다!");
+        return false;
+	}
+}
+</script>
 </head>
 <body>
 <div id="page">
@@ -72,23 +95,24 @@ String user_index;
 
 		<div id="main">
 			<div class="container" style="padding-top: 100px;">
-				<form action="../SignUp.user" method="POST" >
+				<form action="../SignUp.user" method="POST" name="userInfo" onsubmit="return checkValue()">
 				<table class="table" >
 					<caption align="left"><strong>회원가입</strong></caption>
 					<tbody >
 					
 					<tr>
 						<th align="center" style="background-color:#D9D8D8" >아이디</th>
-						<td><input type="text" name="user_id" /> <input type="button" name="singin" value="중복검사"> 아이디는 영어와 숫자만 가능 
-							<input type="hidden" name="isDuplication" value="unChecked"></td>
+						<td><input type="text" name="user_id" onkeydown="inputIdChk()" required autofocus pattern="^[a-zA-Z0-9]{6,15}$"> 
+							<input type="button" name="checkButton" value="중복검사" onclick="IDCheck()"> 아이디는 영어와 숫자만 가능 
+							<input type="hidden" name="idChecked" value="unChecked"></td>
 					</tr>	
 					<tr>
 						<th align="center" style="background-color: #D9D8D8">비밀번호</th>
-						<td><input type="password" name="user_pw" style="width:300px;"></td>
+						<td><input type="password" name="user_pw" style="width:300px;" required pattern="^[a-zA-Z0-9!@#$%^*+=-_]{8,20}$"></td>
 					</tr>
 					<tr>
 						<th align="center" style="background-color: #D9D8D8">이름</th>
-						<td><input type="text" name="user_name" style="width:300px;"></td>
+						<td><input type="text" name="user_name" style="width:300px;" required pattern="^[a-zA-Z가-힣]+$"></td>
 					</tr>
 					<tr>
 						<th style="background-color: #D9D8D8">성별</th>
@@ -97,19 +121,31 @@ String user_index;
 					</tr>
 					<tr>
 			            <th style="background-color: #D9D8D8">생년월일</th>
-			            <td><input type="text" name="year"> 년 <input type="text" name="month"> 월 <input type="text" name="day"> 일</td>
+			            <td><input type="text" name="year" required pattern="^[0-9]{4}$"> 년
+			             	<select name="month">
+				             	<c:forEach var="i" begin="1" end="12">
+				             		<option value="${i}" >${i}</option>
+				             	</c:forEach>
+			             	</select> 월 
+			             	<select name="day">
+				             	<c:forEach var="i" begin="1" end="31">
+				             		<option value="${i}" >${i}</option>
+				             	</c:forEach>
+			             	</select> 일</td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">이메일</th>
-			            <td><input type="text" name="user_email" /></td>
+			            <td><input type="text" name="user_email" pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"></td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">전화번호</th>
-			            <td><input type="text" name="phone1"> - <input type="text" name="phone2"> - <input type="text" name="phone3"></td>
+			            <td><input type="text" name="phone1" required pattern="^010|011|016|017|018|019$"> - 
+			            	<input type="text" name="phone2" required pattern="^[0-9]{3,4}$"> - 
+			            	<input type="text" name="phone3" required pattern="^[0-9]{4}$"></td>
 			        </tr>
 			        <tr>
 			            <th style="background-color: #D9D8D8">주소</th>
-			            <td><input type="text" name="user_address">
+			            <td><input type="text" name="user_address" required>
 			            	<input type="hidden" name="fromWeb" value="true"></td>
 			        </tr>
 					</tbody>

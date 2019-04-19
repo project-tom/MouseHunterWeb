@@ -6,7 +6,7 @@
 </div>
 <div class="card-body">
 	<form action="../SignIn.user" class="form-signin" method="POST" onSubmit="logincall();return false">
-		<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요 " name="user_id" required autofocus>
+		<input type="text" id="uid" class="form-control" placeholder="아이디를 입력하세요 " name="user_id" required autofocus >
 		<input type="password" id="upw" class="form-control" placeholder="비밀번호를 입력하세요" name="user_pw" required>
 		<input type="hidden" name="fromWeb" value="true">
 		<div class="checkbox">
