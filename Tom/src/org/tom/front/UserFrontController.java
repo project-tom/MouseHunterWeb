@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.tom.controller.UserCheckController;
 import org.tom.controller.UserCheckIDController;
 import org.tom.controller.UserDeleteController;
 import org.tom.controller.UserListController;
@@ -65,6 +66,10 @@ public class UserFrontController extends HttpServlet {
 		}
 		if(command.equals("/Delete.user")) {
 			action = new UserDeleteController();
+			actionForward = action.execute(request, response);
+		}
+		if(command.equals("/Check.user")) {
+			action = new UserCheckController();
 			actionForward = action.execute(request, response);
 		}
 		if(command.equals("/UserList.user")) {

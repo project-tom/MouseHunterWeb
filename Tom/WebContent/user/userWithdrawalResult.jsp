@@ -7,16 +7,8 @@ static Logger logger = Logger.getLogger("signWithdrawal.jsp");
 %>
 <%
 	logger.debug("[Page Load...] : signWithdrawal.jsp");
-	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
-		String user_index = session.getAttribute("user_index").toString();
-		pageContext.setAttribute("userLogined", "true");
-		pageContext.setAttribute("user_index", user_index);
-		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
-		if(session.getAttribute("Admin").toString().equals("true")){
-			pageContext.setAttribute("isAdmin", true);
-			logger.debug("[Hi Admin]");
-		}
-	}
+	session.removeAttribute("logined");
+	session.removeAttribute("user_index");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
@@ -68,25 +60,10 @@ static Logger logger = Logger.getLogger("signWithdrawal.jsp");
 		</c:choose>	
 
 <!----------------------------------회원탈퇴 테이블---------------------------------->
-		<div id="main">
-		<p align="center" style="font-size:30pt; padding-top: 100px" > 그 동안 MouseHunter를 이용해 주셔서 감사합니다.<p>
+	<div id="main">
+		<p align="center" style="font-size:30pt; padding-top: 100px" > 회원 탈퇴가 완료되었습니다.<p>
 		<div class="container">
-			<table class="table" >
-				<caption align="left"><strong>회원탈퇴</strong></caption>
-				<tbody style="background-color: #E4DBD9">
-				<tr>
-					<th align="center">아이디</th>
-					<td><input type="text" name="title" style="width:300px;"/></td>
-				</tr>	
-				<tr>
-					<th align="center">비밀번호</th>
-					<td><input type="text" name="content" style="width:300px;"></td>
-				</tr>
-				</tbody>
-			</table>	
-			<hr/>
-			<a class="btn btn-default pull-right">탈퇴</a>
-			<a class="btn btn-default pull-right">취소</a>
+			<a class="btn btn-default pull-right" href="/user/signIn.jsp">확인</a>
 		</div>
 	</div>
 <!----------------------------------풋터---------------------------------->

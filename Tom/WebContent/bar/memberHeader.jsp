@@ -24,8 +24,8 @@
 								aria-expanded="false">MyPage<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li class="active"><a href="/user/logout.jsp">로그아웃</a></li>
-								<li><a href="/user/signUpdate.jsp">회원정보수정</a></li>
-								<li><a href="/user/signWithdrawal.jsp">회원탈퇴</a></li>
+								<li><a href="/user/signUserCheck.jsp?flag=Modify">회원정보수정</a></li>
+								<li><a href="/user/signUserCheck.jsp?flag=Withdrawal">회원탈퇴</a></li>
 							</ul>	
 						</li>
 					</c:when>

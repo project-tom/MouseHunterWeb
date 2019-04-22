@@ -19,6 +19,7 @@ public class UserModifyController implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
 		UserDAOImpl dao = new UserDAOImpl();
 		UserVO vo = new UserVO();

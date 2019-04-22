@@ -9,8 +9,11 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 	logger.debug("[Page Load...] : signIn.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
+		String user_name = session.getAttribute("user_name").toString();
 		pageContext.setAttribute("userLogined", "true");
 		pageContext.setAttribute("user_index", user_index);
+		pageContext.setAttribute("user_name", user_name);
+		
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			pageContext.setAttribute("isAdmin", true);
@@ -18,7 +21,21 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 		}
 	}else{
 		pageContext.setAttribute("userLogined", "false");
+		String name = "";
+		String value = "";
+		if(request.getHeader("Cookie")!=null){ // 쿠키 생성여부 확인
+			Cookie cookies[] = request.getCookies(); // 쿠키 저장
+			for(int i=0; i<cookies.length; i++){ // 쿠키 전체 조회
+				if(cookies[i].getName().equals("user_id")){ //쿠키들중 이름인 name 인 쿠키일 경우 
+					name = cookies[i].getName();
+					value = cookies[i].getValue();
+				}
+			}
+			
+		}
+		pageContext.setAttribute("user_id", value);
 	}
+	
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
