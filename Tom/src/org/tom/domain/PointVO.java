@@ -69,7 +69,12 @@ public class PointVO {
 		this.hunting_count = hunting_count;
 	}
 	public java.sql.Date getReset_date() {
-		return new java.sql.Date(reset_date.getTime());
+		if(reset_date != null) {
+			return new java.sql.Date(reset_date.getTime());
+		}else {
+			return null;
+		}
+		
 	}
 	public void setReset_date(Date reset_date) {
 		this.reset_date = reset_date;

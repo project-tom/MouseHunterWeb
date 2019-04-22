@@ -6,12 +6,22 @@
 %>
 <%
 session.setMaxInactiveInterval(10);
-session.setAttribute("logined","true");
+
 
 String user_index = request.getAttribute("user_index_temp").toString();
-session.setAttribute("user_index", user_index);
-if(!user_index.equals("")){
+
+if(user_index.equals("")){
+	session.setAttribute("logined","false");
+	logger.debug("Login Failed...");
+}else{
+	if(session.getAttribute("logined")!=null){
+		session.removeAttribute("logined");
+	}
+	session.setAttribute("logined","true");
+	session.setAttribute("user_index", user_index);
+	
 	logger.debug("[Session Create]");
+	logger.debug("Login Success!");
 	logger.debug("::: user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString()+" :::");
 
 	if(request.getAttribute("admin")!=null&&request.getAttribute("admin").toString().equals("true")){

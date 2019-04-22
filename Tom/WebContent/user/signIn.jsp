@@ -16,6 +16,8 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 			pageContext.setAttribute("isAdmin", true);
 			logger.debug("[Hi Admin]");
 		}
+	}else{
+		pageContext.setAttribute("userLogined", "false");
 	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

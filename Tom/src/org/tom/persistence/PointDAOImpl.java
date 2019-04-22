@@ -40,7 +40,6 @@ public class PointDAOImpl extends DAO implements PointDAO{
 				vo.setBluetooth_address(rs.getString("bluetooth_address"));
 				CountDAOImpl dao = new CountDAOImpl();
 				CountVO countVO = dao.countRead(rs.getInt("point_index"));
-				System.out.println(countVO.getHunting_count());
 				
 				if(countVO.getHunting_count()!= 0 && countVO.getReset_date() !=null) {
 					vo.setHunting_count(countVO.getHunting_count());

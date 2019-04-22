@@ -30,8 +30,12 @@ public class PointListWebController implements Action {
 		PointDAOImpl dao = new PointDAOImpl();
 		
 		// dao 객체의 getPointList 함수로 좌표 목록을 저장
-		ArrayList<PointVO> pointList = dao.getPointList(Integer.parseInt(request.getParameter("user_index")));
-		
+		ArrayList<PointVO> pointList;
+		if(request.getParameter("user_index").equals("")){
+			pointList = null;
+		}else {
+			pointList = dao.getPointList(Integer.parseInt(request.getParameter("user_index")));
+		}
 		// 좌표 목록을 결과 페이지로 전송
 		request.setAttribute("pointList", pointList);
 		
