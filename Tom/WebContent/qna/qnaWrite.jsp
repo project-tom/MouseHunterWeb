@@ -18,6 +18,7 @@ static Logger logger = Logger.getLogger("qnaWrite.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		user_index = session.getAttribute("user_index").toString();
 		pageContext.setAttribute("userLogined", "true");
+		pageContext.setAttribute("user_index", user_index);
 		System.out.println("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			pageContext.setAttribute("isAdmin", true);

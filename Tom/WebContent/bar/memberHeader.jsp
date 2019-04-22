@@ -15,7 +15,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
 			<ul class="nav navbar-nav">
 				<li><a href="../QnAList.qna?page=1">QnA</a></li>
-				<li><a href="../user/map.jsp">Map</a></li>
+				<li><a href="../PointListWeb.po?user_index=${pageScope.user_index }">Map</a></li>
 				<c:choose>
 					<c:when test="${pageScope.userLogined == 'true'}">
 						<li class="dropdown">

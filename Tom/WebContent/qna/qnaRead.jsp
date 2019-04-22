@@ -13,6 +13,7 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 		String btn = "수정";
 		String flag = "";
 		pageContext.setAttribute("userLogined", "true");
+		pageContext.setAttribute("user_index", user_index);
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			btn="답글";

@@ -20,6 +20,7 @@ import org.tom.controller.CountAddController;
 import org.tom.controller.PointAddController;
 import org.tom.controller.PointDeleteController;
 import org.tom.controller.PointListController;
+import org.tom.controller.PointListWebController;
 import org.tom.controller.PointModifyController;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
@@ -54,7 +55,10 @@ public class PointFrontController extends HttpServlet {
 			action = new PointListController();
 			actionForward = action.execute(request, response);
 		}
-		
+		if(command.equals("/PointListWeb.po")) {
+			action = new PointListWebController();
+			actionForward = action.execute(request, response);
+		}
 		if(command.equals("/PointAdd.po")) {
 			action = new PointAddController();
 			actionForward = action.execute(request, response);

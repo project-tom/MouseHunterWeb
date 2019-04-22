@@ -10,6 +10,7 @@ static Logger logger = Logger.getLogger("signIn.jsp");
 	if(session.getAttribute("logined")!=null && session.getAttribute("logined").equals("true")){
 		String user_index = session.getAttribute("user_index").toString();
 		pageContext.setAttribute("userLogined", "true");
+		pageContext.setAttribute("user_index", user_index);
 		logger.debug("user_index : "+user_index+" is logined : "+session.getAttribute("logined").toString());
 		if(session.getAttribute("Admin").toString().equals("true")){
 			pageContext.setAttribute("isAdmin", true);

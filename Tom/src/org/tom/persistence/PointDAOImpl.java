@@ -43,7 +43,6 @@ public class PointDAOImpl extends DAO implements PointDAO{
 				System.out.println(countVO.getHunting_count());
 				
 				if(countVO.getHunting_count()!= 0 && countVO.getReset_date() !=null) {
-					System.out.println(countVO.getReset_date());
 					vo.setHunting_count(countVO.getHunting_count());
 					vo.setReset_date(countVO.getReset_date());
 				}else {
