@@ -41,16 +41,19 @@ public class UserSignInController implements Action {
 		// dao 의 출력 결과를 result에 저장
 		// userSignIn의 반환형은 boolean으로 id와 pw 가 DB의 정보와 일치하면 true, 아니면 false를 반환한다.
 		boolean result= dao.userSignIn(vo);
+		
 		if(result) {
 			// 로그인이 성공할시 해당 유저의 사용자 번호도 전달한다.
 			request.setAttribute("user_index_temp", new UserDAOImpl().userIndexReturn(vo));
-			request.setAttribute("user_name", new UserDAOImpl().userInfo(new UserDAOImpl().userIndexReturn(vo)).getUser_name());
-			if(request.getParameter("remember_ID").equals("remember_ID")) {
-				request.setAttribute("remember_ID", "remember_ID");
-				request.setAttribute("user_id", request.getParameter("user_id"));
-			}
-			if(request.getParameter("user_id").equals("admin")) {
-				request.setAttribute("admin", "true");
+			if(request.getParameter("fromWeb").equals("true")) {
+				request.setAttribute("user_name", new UserDAOImpl().userInfo(new UserDAOImpl().userIndexReturn(vo)).getUser_name());
+				if(request.getParameter("remember_ID").equals("remember_ID")) {
+					request.setAttribute("remember_ID", "remember_ID");
+					request.setAttribute("user_id", request.getParameter("user_id"));
+				}
+				if(request.getParameter("user_id").equals("admin")) {
+					request.setAttribute("admin", "true");
+				}
 			}
 		}else {
 			request.setAttribute("user_index_temp", "");
