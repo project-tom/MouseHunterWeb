@@ -1,3 +1,4 @@
+<%@page import="org.tom.domain.QnAVO"%>
 <%@page import="org.tom.persistence.QnADAOImpl"%>
 <%@page import="org.apache.log4j.Logger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -26,6 +27,17 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 		pageContext.setAttribute("flag", flag);
 		logger.debug("btn : "+btn);
 	}
+	QnAVO vo = (QnAVO)request.getAttribute("info");
+	String content = vo.getQna_content();
+	String question = null;
+	if(content.indexOf("[---]") >-1){
+		question = content.substring(0,content.lastIndexOf("[---]"));
+		content =content.substring(content.lastIndexOf("[---]")+5);
+		logger.debug("question : "+ question + "content" + content);
+		
+	}
+	pageContext.setAttribute("question", question);
+	pageContext.setAttribute("content", content);
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="info" value="${info }"></c:set>
@@ -35,6 +47,7 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 	pageContext.setAttribute("dao", dao);
 %>
 <c:set var="exist" value=""></c:set>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -67,6 +80,15 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 	#footer{background-color: #24BDFF;}	
 </style>
 <link rel="stylesheet" href="/css/bootstrap.css">
+
+<script type="text/javascript">
+function CheckQnAPass(){
+	var url = "/user/checkQnAPassForm.jsp?page="+${param.page }+"&index="+${info.getQna_index()};
+	open(url,
+		"CheckQnAPass",
+		"toolbar=no,location=no,status=no,scrollbars=no,menubar=no,resizable=no,width=300,height=200");
+}
+</script>
 </head>
 <body>
 <div id="page">
@@ -106,20 +128,40 @@ static Logger logger = Logger.getLogger("qnaRead.jsp");
 				</tr>
 				<tr>
 					<th align="center">제목</th>
-					<td>${info.getQna_title() }</td>
+					<td>${info.getQna_title()}</td>
 					<th align="center">작성자</th>
-					<td>${info.getQna_author() }</td>
+					<td>${info.getQna_author()}</td>
 				</tr>	
+				<c:choose>
+					<c:when test="${pageScope.question !=null}">
+				<tr>
+					<th align="center">문의</th>
+					<td colspan="3">
+						${pageScope.question}
+					</td>
+				</tr>
+				<tr>
+					<th align="center">답변</th>
+					<td colspan="3">
+						${pageScope.content}
+					</td>
+				</tr>
+					</c:when>
+					<c:otherwise>
 				<tr>
 					<th align="center">내용</th>
-					<td colspan="3" >${info.getQna_content()}</td>
+					<td colspan="3">
+						${pageScope.content}
+					</td>
 				</tr>
+					</c:otherwise>
+				</c:choose>
 				</tbody>
 			</table>	
 			<hr/>
 			<a class="btn btn-default pull-right" href="../QnAList.qna?page=${param.page }">목록</a>
 			<c:if test="${userLogined == 'true' }">
-				<a class="btn btn-default pull-right" href="../QnADelete.qna?page=${param.page }&index=${info.getQna_index()}">삭제</a>
+				<button class="btn btn-default pull-right" onclick="CheckQnAPass()">삭제</button>
 				<c:if test="${!dao.answer(info.getQna_index())}">
 					<a class="btn btn-default pull-right" href="qna/qnaWrite.jsp?page=${param.page }&flag=${pageScope.flag}&index=${info.getQna_index()}">${pageScope.btn}</a>
 				</c:if>

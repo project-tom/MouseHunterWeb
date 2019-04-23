@@ -287,5 +287,28 @@ public class QnADAOImpl extends DAO implements QnADAO {
 			} catch (Exception e) {}
 		}
 	}
+	public boolean qnaCheckPW(QnAVO vo) {
+		try {
+			pstmt = conn.prepareStatement("SELECT count(qna_index) FROM qna WHERE qna_pass= ? AND qna_index = ?");
+			pstmt.setString(1, vo.getQna_pass());
+			pstmt.setInt(2, vo.getQna_index());
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			if(rs.getInt(1) == 1) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			try {
+				close();
+			} catch (Exception e) {}
+		}
+	}
 
 }

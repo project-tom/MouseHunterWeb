@@ -29,7 +29,16 @@ public class QnAAddController implements Action {
 		vo.setQna_title(request.getParameter("qna_title"));
 		
 		logger.debug("title is : " + request.getParameter("qna_title"));
-		vo.setQna_content(request.getParameter("qna_content"));
+		String content = new String();
+		if(request.getParameter("question") != null) {
+			content = request.getParameter("question")+
+					"[---]"+
+					request.getParameter("qna_content");
+		}else {
+			content = request.getParameter("qna_content");
+		}
+		
+		vo.setQna_content(content);
 		vo.setQna_author(request.getParameter("qna_author"));
 		vo.setQna_pass(new PasswordEncryption(request.getParameter("qna_pass")).getPass());
 		if(request.getParameter("isAdmin").equals("true")) {

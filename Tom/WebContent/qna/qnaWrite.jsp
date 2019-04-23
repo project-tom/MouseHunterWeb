@@ -145,7 +145,8 @@ static Logger logger = Logger.getLogger("qnaWrite.jsp");
 				<c:if test="${param.flag == 'reply' }">
 					<tr>
 						<th align="center">문의</th>
-						<td> ${info.getQna_content() }</td>
+						<td> ${info.getQna_content() }
+							<input type="hidden" name="question" value="${info.getQna_content() }"></td>
 					</tr>
 				</c:if>
 				<tr>

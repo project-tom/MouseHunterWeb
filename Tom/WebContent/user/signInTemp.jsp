@@ -17,7 +17,7 @@ if(user_index.equals("")){
 	if(session.getAttribute("logined")!=null){
 		session.removeAttribute("logined");
 	}
-	if(request.getAttribute("remember_ID").toString().equals("remember_ID")){
+	if(request.getAttribute("remember_ID")!=null &&request.getAttribute("remember_ID").toString().equals("remember_ID")){
 		Cookie cookie = new Cookie("user_id",request.getAttribute("user_id").toString());
 		cookie.setMaxAge(600);
 		response.addCookie(cookie);
