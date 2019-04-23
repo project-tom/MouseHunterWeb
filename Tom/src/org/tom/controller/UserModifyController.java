@@ -9,8 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.com.encryption.PasswordEncryption;
 import org.tom.domain.UserVO;
+import org.tom.encryption.PasswordEncryption;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
 import org.tom.persistence.UserDAOImpl;

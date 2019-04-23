@@ -2,8 +2,8 @@ package org.tom.test;
 
 import java.io.IOException;
 
-import org.com.encryption.PasswordEncryption;
 import org.junit.Test;
+import org.tom.encryption.PasswordEncryption;
 
 public class PassTest {
 	@Test

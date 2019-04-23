@@ -1,4 +1,4 @@
-<%@page import="org.com.encryption.PasswordEncryption"%>
+<%@page import="org.tom.encryption.PasswordEncryption"%>
 <%@page import="org.tom.domain.QnAVO"%>
 <%@page import="org.tom.persistence.QnADAOImpl"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

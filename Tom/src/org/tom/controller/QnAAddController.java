@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.com.encryption.PasswordEncryption;
 import org.tom.domain.QnAVO;
+import org.tom.encryption.PasswordEncryption;
 import org.tom.forword.Action;
 import org.tom.forword.ActionForward;
 import org.tom.persistence.QnADAOImpl;

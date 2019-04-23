@@ -1,4 +1,4 @@
-package org.com.encryption;
+package org.tom.encryption;
 
 import java.io.IOException;
 
