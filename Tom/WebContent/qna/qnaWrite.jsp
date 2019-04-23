@@ -113,7 +113,7 @@ static Logger logger = Logger.getLogger("qnaWrite.jsp");
 	<!--------------------------------게시판 쓰기 테이블-------------------------------------->
 	<div id="main">
 		<div class="container" style="padding-top: 100px;">
-			<form action="../${uri}.qna?page=${param.page }" method="post">
+			<form action="../${uri}.qna?page=${param.page }&flag=${param.flag}" method="post">
 			<table class="table" >
 				<caption align="left"><strong>QnA</strong></caption>
 				<c:if test="${param.flag == 'modify' }">

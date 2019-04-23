@@ -43,11 +43,16 @@ public class QnAAddController implements Action {
 		vo.setQna_pass(new PasswordEncryption(request.getParameter("qna_pass")).getPass());
 		if(request.getParameter("isAdmin").equals("true")) {
 			vo.setQna_answer(1);
-			vo.setQna_parentnum(Integer.parseInt(request.getParameter("qna_index")));
+			if(request.getParameter("flag").equals("reply")) {
+				vo.setQna_parentnum(Integer.parseInt(request.getParameter("qna_index")));
+			}else {
+				vo.setQna_parentnum(index+1);
+			}
 		}else {
 			vo.setQna_answer(0);
 			vo.setQna_parentnum(index+1);
 		}
+		
 		dao = new QnADAOImpl();
 		boolean result = dao.qnaAdd(vo);
 		
